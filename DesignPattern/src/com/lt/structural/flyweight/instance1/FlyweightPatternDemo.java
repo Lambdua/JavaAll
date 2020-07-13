@@ -8,7 +8,7 @@ import java.util.Random;
  * @Date 2019/11/27
  **/
 public class FlyweightPatternDemo {
-    private static final String colors[] = {
+    private static final String[] colors = {
             "Red", "Green", "Blue", "White", "Black"
     };
 
