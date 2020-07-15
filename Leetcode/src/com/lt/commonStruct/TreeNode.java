@@ -24,7 +24,7 @@ public class TreeNode {
      * @param nodes
      * @return 1+2+4+8
      */
-    public static TreeNode createThree(Integer[] nodes) {
+    public static TreeNode createThree(Integer...nodes) {
         TreeNode header = new TreeNode(nodes[0]);
         recursiveCreateTree(header,0,0,nodes);
         return header;
