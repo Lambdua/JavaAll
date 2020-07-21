@@ -65,8 +65,8 @@ public class Demo {
 
         // 之后就可以使用分类器进行分类
 //        String text = "习近平温家宝江泽民";
-        String text="温嘉伯刘备管仲鲍勃";
-        int topN = 3;  // 保留最有可能的3个结果
+        String text="如何看待 7 月 14 日肖战工作室发布的致歉信，承认对粉丝管理上存在疏忽和缺位？";
+        int topN = 4;  // 保留最有可能的3个结果
         ClassifyResult[] result = classifier.classifyText(text, topN);
         for (int i = 0; i < topN; ++i) {
             // 输出分类编号，分类名称，以及概率值。
