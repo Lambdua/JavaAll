@@ -1,4 +1,4 @@
-package com.lt;
+package com.lt.util;
 
 /**
  * 文件大小单位枚举类

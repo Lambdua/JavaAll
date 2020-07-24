@@ -1,4 +1,4 @@
-package com.lt;
+package com.lt.winHaoChenCad;
 
 import lombok.Data;
 
@@ -14,7 +14,7 @@ public class CADProperties {
      */
     private Integer id;
     /**
-     * 图纸名，不支持中文。test.dwg位于path设定的路径中
+     * 图纸名，不支持中文。(测试中文可以)
      */
     private String name;
 
@@ -30,18 +30,23 @@ public class CADProperties {
     private String ocf;
 
     /**
-     * 布局名称
-     * 为空时会自动转换默认图纸空间，当在前端点击布局功能，切换布局时，会发送请求，里面有layout名称，后台获取后赋值给这个layout。
+     * 布局名称 为空时会自动转换默认图纸空间，
+     * 当在前端点击布局功能，切换布局时，会发送请求，里面有layout名称，后台获取后赋值给这个layout。
      */
     private String layout;
 
     /**
-     * 为空即可，暂时用不到
+     * 为空即可(用户令牌)
      */
     private String utoken;
 
     /**
      * 执行转化任务的名称
+     * 转ocf:必须是 MakeOcf
+     * 转thumb:是 GetThumb
      */
     private String taskclass="MakeOcf";
+
+
+
 }
