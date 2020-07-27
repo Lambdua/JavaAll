@@ -13,8 +13,8 @@ import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
 public class Testmain {
-//    static final String dwgPath = "D:\\WebCAD\\file\\dwg";
-    static final String dwgPath = "D:\\WebCAD\\file\\dxf";
+    static final String dwgPath = "D:\\WebCAD\\file\\dwg";
+//    static final String dwgPath = "D:\\WebCAD\\file\\dxf";
     static final String ocfPath = "D:\\WebCAD\\file\\ocf";
 
     public static void main(String[] args) throws InterruptedException {
@@ -34,12 +34,15 @@ public class Testmain {
         int length = files.length;
         countDownLatch = new CountDownLatch(length);
         Arrays.stream(files).forEach(file -> {
+            //并发执行
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             new Thread(new SocketThread(file)).start();
+            //顺序执行
+//            new SocketThread(file).run();
         });
         countDownLatch.await();
         long end = System.currentTimeMillis();
@@ -72,6 +75,8 @@ public class Testmain {
             int id = random.nextInt();
             cadProperties.setId(id);
             cadProperties.setName(name);
+//            cadProperties.setLayout("*Paper_Space");
+//            cadProperties.setLayout("*Paper_Space0");
             String ocf = name.substring(0, name.lastIndexOf(".")) + ".ocf";
             cadProperties.setOcf(ocf);
             long start = System.currentTimeMillis();
