@@ -13,9 +13,9 @@ import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
 public class Testmain {
-    static final String dwgPath = "D:\\WebCAD\\file\\dwg";
+    static final String dwgPath = "E:\\home\\file\\dwg";
 //    static final String dwgPath = "D:\\WebCAD\\file\\dxf";
-    static final String ocfPath = "D:\\WebCAD\\file\\ocf";
+    static final String ocfPath = "E:\\home\\file\\ocf";
 
     public static void main(String[] args) throws InterruptedException {
         Testmain entity = new Testmain();
@@ -24,7 +24,7 @@ public class Testmain {
 
     static int webCadPort = 3181;
     static String ip = "127.0.0.1";
-    //    private static String ip = "121.199.44.208";
+//        private static String ip = "121.199.44.208";
     CountDownLatch countDownLatch;
 
     public void SyncSub() throws InterruptedException {
@@ -35,14 +35,14 @@ public class Testmain {
         countDownLatch = new CountDownLatch(length);
         Arrays.stream(files).forEach(file -> {
             //并发执行
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            new Thread(new SocketThread(file)).start();
+//            try {
+//                Thread.sleep(500);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            new Thread(new SocketThread(file)).start();
             //顺序执行
-//            new SocketThread(file).run();
+            new SocketThread(file).run();
         });
         countDownLatch.await();
         long end = System.currentTimeMillis();
@@ -86,6 +86,7 @@ public class Testmain {
                     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()))
             ) {
                 String jsondata = JsonUtil.makeJson(cadProperties);
+                System.out.println("jsondata = " + jsondata);
                 docomm(reader, bw, jsondata);
             } catch (IOException e) {
                 e.printStackTrace();
