@@ -1,15 +1,17 @@
 package com.lt.asynchronous;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.*;
 
 /**
  * @author liangtao
  * @Date 2020/8/31
  **/
 public class AsyncFutureExample {
-    public static String doSomethingA() {
 
+    private static final int AVALIABLE_PROCESSORS=Runtime.getRuntime().availableProcessors();
+    private final static ThreadPoolExecutor POOL_EXECUTOR=new ThreadPoolExecutor(AVALIABLE_PROCESSORS,
+            AVALIABLE_PROCESSORS*2,1, TimeUnit.MINUTES,new LinkedBlockingQueue<>(5));
+    public static String doSomethingA() {
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -48,8 +50,9 @@ public class AsyncFutureExample {
         });
 
         // 2.开启异步单元执行任务A
-        Thread thread = new Thread(futureTask, "threadA");
-        thread.start();
+//        Thread thread = new Thread(futureTask, "threadA");
+//        thread.start();
+        POOL_EXECUTOR.execute(futureTask);
 
         // 3.执行任务B
         String taskBResult = doSomethingB();
