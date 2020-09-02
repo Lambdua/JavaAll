@@ -1,6 +1,6 @@
 package com.lt.util;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSON;
 import com.lt.winHaoChenCad.SocketProperties;
 
 /**
@@ -9,10 +9,10 @@ import com.lt.winHaoChenCad.SocketProperties;
  **/
 public class JsonUtil {
     public static String makeJson(Object cadProperties){
-        String cadJson = JSONObject.toJSONString(cadProperties);
+        String cadJson = JSON.toJSONString(cadProperties);
         SocketProperties socketProperties = new SocketProperties();
         socketProperties.setInput(cadJson);
         socketProperties.setStatus(0);
-        return JSONObject.toJSONString(socketProperties);
+        return JSON.toJSONString(socketProperties);
     }
 }
