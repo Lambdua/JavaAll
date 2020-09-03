@@ -1,11 +1,11 @@
-package com.lt.asynchronous;
+package com.lt.completableFuture;
 
 import org.junit.Test;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-import static com.lt.asynchronous.CompletableFutureConstant.POOL_EXECUTOR;
+import static com.lt.completableFuture.CompletableFutureConstant.POOL_EXECUTOR;
 
 /**
  * @author 梁先生

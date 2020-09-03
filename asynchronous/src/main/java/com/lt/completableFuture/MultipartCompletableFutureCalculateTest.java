@@ -1,4 +1,4 @@
-package com.lt.asynchronous;
+package com.lt.completableFuture;
 
 import org.junit.Test;
 
@@ -53,7 +53,7 @@ public class MultipartCompletableFutureCalculateTest {
     @Test
     public void thenComposeTest() throws ExecutionException, InterruptedException {
         //等doSomethingOne执行完毕后，接着执行doSomethingTwo
-        CompletableFuture<String> result = doSomethingOne("213").thenCompose(this::doSomethingTwo);
+        CompletableFuture<String> result = doSomethingOne("213").thenComposeAsync(this::doSomethingTwo);
         System.out.println(result.get());
     }
 
