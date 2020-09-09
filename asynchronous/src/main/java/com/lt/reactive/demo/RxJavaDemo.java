@@ -104,6 +104,17 @@ public class RxJavaDemo {
     }
 
 
+    /**
+     *在RxJava中，操作运算符不能直接使用Threads或ExecutorServices进行异步处理，而需要使用Schedulers来抽象统一API背后的并发调度线程池。
+     * RxJava提供了几个可通过Schedulers访问的标准调度执行器。
+     * .Schedulers.computation()：在后台运行固定数量的专用线程来计算密集型工作。大多数异步操作符使用它作为其默认调度线程池。
+     * ·Schedulers.io()：在动态变化的线程集合上运行类I/O或阻塞操作。
+     * ·Schedulers.single()：以顺序和FIFO方式在单个线程上运行。
+     * ·Schedulers.trampoline()：在其中一个参与线程中以顺序和FIFO方式运行，通常用于测试目的。
+     * RxJava还可以让我们通过Schedulers.from（Executor）将现有的Executor（及其子类型，如ExecutorService）包装到Scheduler中
+     */
+
+
     @Test
     public void flatMapAsync() {
         List<String> ipList = getIPList();

@@ -19,21 +19,10 @@
         <reactivex.version>2.2.10</reactivex.version>
     </properties>
 
-<!--    <dependencyManagement>-->
-<!--        <dependencies>-->
-<!--            <dependency>-->
-<!--                <groupId>io.projectreactor</groupId>-->
-<!--                <artifactId>reactor-bom</artifactId>-->
-<!--                <version>Dysprosium-M1</version>-->
-<!--                <type>pom</type>-->
-<!--                <scope>import</scope>-->
-<!--            </dependency>-->
-<!--        </dependencies>-->
-<!--    </dependencyManagement>-->
-
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/io.projectreactor/reactor-core -->
+
+        <!--基于Recator异步依赖-->
         <dependency>
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-core</artifactId>
@@ -44,6 +33,35 @@
             <artifactId>reactor-test</artifactId>
             <version>3.3.9.RELEASE</version>
             <scope>test</scope>
+        </dependency>
+
+
+        <!--基于RxJava异步依赖-->
+        <dependency>
+            <groupId>org.reactivestreams</groupId>
+            <artifactId>reactive-streams</artifactId>
+            <version>${reactive.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.reactivestreams</groupId>
+            <artifactId>reactive-streams-tck</artifactId>
+            <version>${reactive.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+
+
+        <dependency>
+            <groupId>io.reactivex.rxjava2</groupId>
+            <artifactId>rxjava</artifactId>
+            <version>${reactivex.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
         </dependency>
 
         <dependency>
@@ -57,28 +75,6 @@
             <version>5.1.4</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.reactivestreams</groupId>
-            <artifactId>reactive-streams</artifactId>
-            <version>${reactive.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.reactivestreams</groupId>
-            <artifactId>reactive-streams-tck</artifactId>
-            <version>${reactive.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>io.reactivex.rxjava2</groupId>
-            <artifactId>rxjava</artifactId>
-            <version>${reactivex.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.12</version>
-        </dependency>
     </dependencies>
 
     <build>
