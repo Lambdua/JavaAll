@@ -6,8 +6,17 @@ import java.util.concurrent.*;
  * @author 梁先生
  * @Date 2020/10/13
  * @see java.util.concurrent.Executor
+ * ThreadPoolExecutor 执行具体流程如下：
+ *
+ * 1）当池子大小小于corePoolSize就新建线程，并处理请求
+ *
+ * 2）当池子大小等于corePoolSize，把请求放入workQueue中，池子里的空闲线程就去从workQueue中取任务并处理
+ *
+ * 3）当workQueue放不下新入的任务时，新建线程入池，并处理请求，如果池子大小撑到了maximumPoolSize就用RejectedExecutionHandler来做拒绝处理
+ *
+ * 4）另外，当池子的线程数大于corePoolSize的时候，多余的线程会等待keepAliveTime长的时间，如果无请求可处理就自行销毁
  **/
-public class ThreadPoolFactory {
+public class ThreadPoolIntroduction {
 
     /**
      * @param corePoolSize    核心线程池大小，即没有执行任务时的线程池大小，只有在工作队列满了的情况下才会创建超出这个数量的线程
@@ -68,22 +77,22 @@ public class ThreadPoolFactory {
     /**
      * 单个工作者线程来执行任务，如果这个线程异常结束，会创建另一个线程来替代。能确保依照任务在队列中的顺序来串行执行。
      */
-    public ThreadPoolExecutor buildSingleThreadPool() {
+    public ExecutorService buildSingleThreadPool() {
         ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+        return singleThreadExecutor;
 //        return new FinalizableDelegatedExecutorService
 //                (new ThreadPoolExecutor(1, 1,
 //                        0L, TimeUnit.MILLISECONDS,
 //                        new LinkedBlockingQueue<Runnable>()));
 
-        return new ThreadPoolExecutor(
-                //线程固定大小为1
-                1, 1,
-                //空闲线程直接回收
-                0L, TimeUnit.MICROSECONDS,
-                new LinkedBlockingQueue<Runnable>());
+//        return new ThreadPoolExecutor(
+//                //线程固定大小为1
+//                1, 1,
+//                //空闲线程直接回收
+//                0L, TimeUnit.MICROSECONDS,
+//                new LinkedBlockingQueue<Runnable>());
     }
 
-//    public ThreadPoolExecutor buildScheduledThreadPoolExecutor
 
     /**
      * 可以在给定的延迟后运行命令，或者定期执行命令。比 Timer 更灵活，功能更强大。
@@ -95,8 +104,6 @@ public class ThreadPoolFactory {
             return "schedule 执行";
         }, 60L, TimeUnit.SECONDS);
         System.out.println(future.get());
-
-
         return scheduledExecutorService;
     }
 
