@@ -20,7 +20,7 @@ public class SemaphoreUse {
 
     public static void main(String[] args) {
         for (int i = 0; i < THREAD_COUNT; i++) {
-            CompletableFutureConstant.POOL_EXECUTOR.execute(()->{
+            CompletableFutureConstant.POOL.execute(()->{
                 try {
                     //获取一个资源信号量，获取不到会一直阻塞
                     someDataSemaphore.acquire();
@@ -33,6 +33,6 @@ public class SemaphoreUse {
                 }
             });
         }
-        CompletableFutureConstant.POOL_EXECUTOR.shutdown();
+        CompletableFutureConstant.POOL.shutdown();
     }
 }

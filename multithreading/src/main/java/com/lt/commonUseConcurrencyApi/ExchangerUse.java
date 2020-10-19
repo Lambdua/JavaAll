@@ -19,7 +19,7 @@ public class ExchangerUse {
 
     public static void main(String[] args) throws InterruptedException {
         //执行第一个
-        CompletableFutureConstant.POOL_EXECUTOR.execute(()->{
+        CompletableFutureConstant.POOL.execute(()->{
             String currentThreadName=Thread.currentThread().getName();
             try {
                 Thread.sleep(1000);
@@ -31,7 +31,7 @@ public class ExchangerUse {
             }
         });
         //执行第二个
-        CompletableFutureConstant.POOL_EXECUTOR.execute(()->{
+        CompletableFutureConstant.POOL.execute(()->{
             String currentThreadName=Thread.currentThread().getName();
             try {
                 Thread.sleep(1000);
@@ -44,6 +44,6 @@ public class ExchangerUse {
         });
         countDownLatch.await();
         System.out.println("main finish");
-        CompletableFutureConstant.POOL_EXECUTOR.shutdown();
+        CompletableFutureConstant.POOL.shutdown();
     }
 }

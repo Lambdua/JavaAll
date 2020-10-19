@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-import static com.lt.completableFuture.CompletableFutureConstant.POOL_EXECUTOR;
+import static com.lt.completableFuture.CompletableFutureConstant.POOL;
 
 /**
  * @author 梁先生
@@ -20,7 +20,7 @@ public class AsyncCalculateResultTransTest {
         //1. 创建一个completableFuture对象
         CompletableFuture<String> future = new CompletableFuture<>();
         // 2.开启线程计算任务结果，并设置
-        POOL_EXECUTOR.execute(() -> {
+        POOL.execute(() -> {
             try {
                 //2.1睡眠
                 Thread.sleep(3000);
@@ -52,7 +52,7 @@ public class AsyncCalculateResultTransTest {
      */
     @Test
     public void runAsyncByCustomizePoolTest() throws ExecutionException, InterruptedException {
-        CompletableFuture future = CompletableFuture.runAsync(constant.runAsyncRunnable, POOL_EXECUTOR);
+        CompletableFuture future = CompletableFuture.runAsync(constant.runAsyncRunnable, POOL);
         constant.templateMethod(future);
     }
 
