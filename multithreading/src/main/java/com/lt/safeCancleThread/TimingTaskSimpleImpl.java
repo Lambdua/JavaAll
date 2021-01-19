@@ -1,4 +1,4 @@
-package com.lt.saveCancleThread;
+package com.lt.safeCancleThread;
 
 import com.lt.completableFuture.CompletableFutureConstant;
 

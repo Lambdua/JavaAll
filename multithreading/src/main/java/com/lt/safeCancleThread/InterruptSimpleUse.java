@@ -1,4 +1,4 @@
-package com.lt.saveCancleThread;
+package com.lt.safeCancleThread;
 
 /**
  * @author 梁先生
