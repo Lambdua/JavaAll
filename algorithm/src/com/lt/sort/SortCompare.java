@@ -13,7 +13,7 @@ public class SortCompare {
         if (alg.equals("Insertion")) new Insert<Double>().sort(a);
 //        if (alg.equals("Insertion")) Insertion.sort(a);
         if (alg.equals("Selection")) new Select<Double>().sort(a);
-        if (alg.equals("Shell")) Shell.sort(a);
+        if (alg.equals("Shell")) new Shell<Double>().sort(a);
         if (alg.equals("Merge")) Merge.sort(a);
         if (alg.equals("Quick")) Quick.sort(a);
         if (alg.equals("Heap")) Heap.sort(a);
@@ -41,6 +41,6 @@ public class SortCompare {
         double t1 = timeRandomInput(alg1, N, T); // 算法1的总时间
         double t2 = timeRandomInput(alg2, N, T); // 算法2的总时间
         StdOut.printf("For %d random Doubles\n %s is", N, alg1);
-        StdOut.printf(" %.1f times faster than %s\n", t2/t1, alg2);
+        StdOut.printf(" %.1f times faster than %s\n", t2 / t1, alg2);
     }
 }
