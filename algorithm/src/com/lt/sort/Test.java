@@ -8,6 +8,7 @@ package com.lt.sort;
 public class Test {
     public static void main(String[] args) {
         Select<String> instance =new Select<>();
+//        Insert<String> instance=new Insert<>();
         instance.testCorrectness(new String[]{"S", "O", "R", "T", "u", "X", "A", "M", "P", "L", "E"});
 
     }
