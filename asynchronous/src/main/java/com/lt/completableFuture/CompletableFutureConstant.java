@@ -1,5 +1,6 @@
 package com.lt.completableFuture;
 
+
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 
@@ -21,7 +22,7 @@ public class CompletableFutureConstant {
     //自定义线程池
     //线程数等于cpu核心数
     public static final int AVALIABLE_PROCESSORS = Runtime.getRuntime().availableProcessors();
-    public static final ThreadPoolExecutor POOL_EXECUTOR = new ThreadPoolExecutor(AVALIABLE_PROCESSORS,
+    public static final ThreadPoolExecutor POOL = new ThreadPoolExecutor(AVALIABLE_PROCESSORS,
             AVALIABLE_PROCESSORS * 2, 1, TimeUnit.MINUTES, new LinkedBlockingQueue<>(5));
 
     public  void templateMethod(CompletableFuture future) throws ExecutionException, InterruptedException {

@@ -1,4 +1,4 @@
-package com.lt.threadDetail;
+package com.lt.threadSimplyUse;
 
 import java.util.concurrent.*;
 

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static com.lt.completableFuture.CompletableFutureConstant.POOL_EXECUTOR;
+import static com.lt.completableFuture.CompletableFutureConstant.POOL;
 
 /**
  * @author 梁先生
@@ -149,14 +149,14 @@ public class RxJavaDemo {
                 .flatMap(ip ->
                         Flowable.just(ip)
                                 //使用我们的自定义线程池
-                                .subscribeOn(Schedulers.from(POOL_EXECUTOR))
+                                .subscribeOn(Schedulers.from(POOL))
                                 .map(v -> rpcCall(v, v)));
         stringFlowable.blockingSubscribe(System.out::println);
 
         // 3.打印耗时
         System.out.println("cost:" + (System.currentTimeMillis() - start));
         //4.关闭线程池,由于POOL_EXECUTOR内部默认创建的是用户线程，所以必须要调用代码4销毁用户线程，这样当前jvm才会正常退出。
-        POOL_EXECUTOR.shutdown();
+        POOL.shutdown();
     }
 
     /**
