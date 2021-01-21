@@ -14,7 +14,7 @@ public class SortCompare {
 //        if (alg.equals("Insertion")) Insertion.sort(a);
         if (alg.equals("Selection")) new Select<Double>().sort(a);
         if (alg.equals("Shell")) new Shell<Double>().sort(a);
-//        if (alg.equals("Merge")) Merge.sort(a);
+        if (alg.equals("Merge")) new MergeInPlace<Double>().sort(a);
         if (alg.equals("Quick")) Quick.sort(a);
         if (alg.equals("Heap")) Heap.sort(a);
         return timer.elapsedTime();

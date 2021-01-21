@@ -10,8 +10,12 @@ import edu.princeton.cs.algs4.StdOut;
  **/
 public abstract class Example<T extends Comparable<T>> {
 
+    public abstract void sort(T[] a, int lo, int hi);
 
-    public abstract void sort(T[] a);
+    public void sort(T[] a){
+        sort(a,0,a.length-1);
+        isSorted(a);
+    }
 
     /**
      * 元素a是否小于元素b
@@ -58,9 +62,10 @@ public abstract class Example<T extends Comparable<T>> {
 
     /**
      * 验证排序正确性和排序输出
+     *
+     * @param a 测试数据
      * @author liangtao
      * @date 2021/1/20
-     * @param a 测试数据
      **/
     public void testCorrectness(T[] a) {
         sort(a);

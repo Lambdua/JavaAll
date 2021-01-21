@@ -8,16 +8,15 @@ package com.lt.sort;
 public class Select<T extends Comparable<T>> extends Example<T> {
 
     @Override
-    public void sort(T[] a) {
-        for (int i = 0; i < a.length; i++) {
+    public void sort(T[] a, int lo, int hi) {
+        for (int i = lo; i <= hi; i++) {
             int min = i;
-            for (int j = i + 1; j < a.length; j++) {
+            for (int j = i + 1; j <= hi; j++) {
                 if (less(a[j], a[min])) {
                     min = j;
                 }
             }
             exch(a, i, min);
         }
-        isSorted(a);
     }
 }
