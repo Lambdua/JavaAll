@@ -18,6 +18,6 @@ public class Select<T extends Comparable<T>> extends Example<T> {
             }
             exch(a, i, min);
         }
-        assert isSorted(a);
+        isSorted(a);
     }
 }

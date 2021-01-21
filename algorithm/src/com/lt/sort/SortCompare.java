@@ -4,7 +4,7 @@ import edu.princeton.cs.algs4.*;
 
 /**
  * @author liangtao
- * @description
+ * @description 配许算法比较
  * @date 2021年01月20 13:50
  **/
 public class SortCompare {
@@ -14,7 +14,7 @@ public class SortCompare {
 //        if (alg.equals("Insertion")) Insertion.sort(a);
         if (alg.equals("Selection")) new Select<Double>().sort(a);
         if (alg.equals("Shell")) new Shell<Double>().sort(a);
-        if (alg.equals("Merge")) Merge.sort(a);
+//        if (alg.equals("Merge")) Merge.sort(a);
         if (alg.equals("Quick")) Quick.sort(a);
         if (alg.equals("Heap")) Heap.sort(a);
         return timer.elapsedTime();

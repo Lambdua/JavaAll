@@ -9,11 +9,15 @@ package com.lt.sort;
 public class Insert<T extends Comparable<T>> extends Example<T> {
     @Override
     public void sort(T[] a) {
-        for (int i = 1; i < a.length; i++) {
+        sort(a,0,a.length-1);
+        isSorted(a);
+    }
+
+    public void sort(T[] a, int lo, int hi) {
+        for (int i = lo + 1; i <= hi; i++) {
             for (int j = i; j > 0 && less(a[j], a[j - 1]); j--) {
                 exch(a, j, j - 1);
             }
         }
-        assert isSorted(a);
     }
 }
