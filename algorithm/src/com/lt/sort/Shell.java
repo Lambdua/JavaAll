@@ -8,7 +8,7 @@ package com.lt.sort;
 public class Shell<T extends Comparable<T>> extends Example<T> {
     @Override
     public void sort(T[] a, int lo, int hi) {
-        int N = hi+1;
+        int N = a.length;
         int h = 1;
         while (h < N / 3) h *= 3 + 1;
         while (h >= 1) {

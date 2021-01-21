@@ -11,16 +11,15 @@ public class SortCompare {
     public static double time(String alg, Double[] a) {
         Stopwatch timer = new Stopwatch();
         if (alg.equals("Insertion")) new Insert<Double>().sort(a);
-//        if (alg.equals("Insertion")) Insertion.sort(a);
         if (alg.equals("Selection")) new Select<Double>().sort(a);
         if (alg.equals("Shell")) new Shell<Double>().sort(a);
-        if (alg.equals("Merge")) new MergeInPlace<Double>().sort(a);
+        if (alg.equals("Merge")) new MergeImpl1<Double>().sort(a);
         if (alg.equals("Quick")) Quick.sort(a);
         if (alg.equals("Heap")) Heap.sort(a);
         return timer.elapsedTime();
     }
 
-    public static double timeRandomInput(String alg, int N, int T) { // 使用算法alg将T个长度为N的数组排序
+    public static double timeRandomInput(String alg, int N, int T) {
 
         double total = 0.0;
         Double[] a = new Double[N];

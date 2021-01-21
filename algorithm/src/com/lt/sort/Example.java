@@ -53,7 +53,7 @@ public abstract class Example<T extends Comparable<T>> {
     public boolean isSorted(T[] a) {
         for (int i = 0; i < a.length - 1; i++) {
             if (less(a[i + 1], a[i])) {
-                StdOut.println("排序错误");
+                StdOut.println("排序错误"+this.getClass().getName());
                 return false;
             }
         }

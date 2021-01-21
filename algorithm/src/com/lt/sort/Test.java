@@ -8,10 +8,12 @@ package com.lt.sort;
 public class Test {
     public static void main(String[] args) {
         //A E L M O P R S T X u
+        //S O R T X A M u L E P
+        //A E L M O P R S T X u
 //        Select<String> instance =new Select<>();
 //        Insert<String> instance=new Insert<>();
-//        Shell<String> instance=new Shell<>();
-        MergeInPlace<String> instance=new MergeInPlace<>();
+        Shell<String> instance=new Shell<>();
+//        MergeImpl2<String> instance=new MergeImpl2<>();
         instance.testCorrectness(new String[]{"S", "O", "R", "T", "u", "X", "A", "M", "P", "L", "E"});
     }
 }
