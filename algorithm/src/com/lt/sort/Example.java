@@ -14,7 +14,6 @@ public abstract class Example<T extends Comparable<T>> {
 
     public void sort(T[] a){
         sort(a,0,a.length-1);
-        isSorted(a);
     }
 
     /**
@@ -69,7 +68,7 @@ public abstract class Example<T extends Comparable<T>> {
      **/
     public void testCorrectness(T[] a) {
         sort(a);
-        assert isSorted(a);
+        isSorted(a);
         show(a);
     }
 }

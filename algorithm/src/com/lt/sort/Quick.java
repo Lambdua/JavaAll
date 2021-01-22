@@ -12,32 +12,38 @@ import edu.princeton.cs.algs4.StdRandom;
 public class Quick<T extends Comparable<T>> extends Example<T> {
     @Override
     public void sort(T[] a) {
+        //打乱
         StdRandom.shuffle(a);
         super.sort(a);
     }
 
     @Override
     public void sort(T[] a, int lo, int hi) {
-
+        if (lo >= hi) return;
+        int point = partition(a, lo, hi);
+        sort(a, lo, point - 1);
+        sort(a, point + 1, hi);
     }
-
 
     /**
      * 切分函数,快排的核心
      **/
     private int partition(T[] a, int lo, int hi) {
-        //我们这里直接取lo位切分点
+        //我们这里直接取lo为切分点
         T point = a[lo];
-        int left = lo, right = hi;
-
+        int left = lo, right = hi + 1;
         while (true) {
             //从左边找到第一个大于切点的点
             while (less(a[++left], point)) if (left == hi) break;
-            //从右边第一个小于切点的
-            while (less(point, a[right--])) if (right == lo) break;
-
+            //从右边找到第一个小于切点的
+            // 其实这里就不用在判断right==lo跳出循环，因为不断向左逼近后，最后一个点一定是我们取得切点本身,切点本身是 >=自己的
+            while (less(point, a[--right])) if (right == lo) break;
+            if (left >= right) break;
+            //交换两个点的位置
+            exch(a, left, right);
         }
-
-
+        //最后交换right点和切点位置，因为right点的位置一定是大于切点的
+        exch(a, lo, right);
+        return right;
     }
 }
