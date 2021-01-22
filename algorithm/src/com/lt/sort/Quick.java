@@ -46,4 +46,22 @@ public class Quick<T extends Comparable<T>> extends Example<T> {
         exch(a, lo, right);
         return right;
     }
+
+    /**
+     * 三向切分的快速排序
+     **/
+    public void sort3Way(T[] a, int lo, int hi) {
+        if (hi <= lo) return;
+        int lt = lo, i = lo + 1, gt = hi;
+        T v = a[lo];
+        while (i <= gt) {
+            int cmp = a[i].compareTo(v);
+            if (cmp < 0) exch(a, lt++, i++);
+            else if (cmp > 0) exch(a, i, gt--);
+            else i++;
+        }
+        // 现在 a[lo..lt-1] < v = a[lt..gt] < a[gt+1..hi]成立
+        sort(a, lo, lt - 1);
+        sort(a, gt + 1, hi);
+    }
 }
