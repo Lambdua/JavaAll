@@ -12,7 +12,7 @@ import java.util.Map;
  * @date 2021年01月20 13:50
  **/
 public class SortCompare {
-    private static Map<String, Example<Double>> sortMap = new HashMap<>();
+    private static Map<String, SortBase<Double>> sortMap = new HashMap<>();
 
     static {
         sortMap.put("insert", new Insert<>());

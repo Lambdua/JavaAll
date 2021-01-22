@@ -9,7 +9,7 @@ import edu.princeton.cs.algs4.StdRandom;
  * 其实归并实在排序之后合并，快排是在排序之前分组,两者对于分组的操作时机不同。
  * @date 2021年01月21 17:17
  **/
-public class Quick<T extends Comparable<T>> extends Example<T> {
+public class Quick<T extends Comparable<T>> extends SortBase<T> {
     @Override
     public void sort(T[] a) {
         //打乱

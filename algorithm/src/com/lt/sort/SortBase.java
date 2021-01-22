@@ -8,7 +8,7 @@ import edu.princeton.cs.algs4.StdOut;
  * 将类的排序代码放在sort()方法中,不同的算法实现，自定义自己的sort方法
  * @date 2021年01月20 09:58
  **/
-public abstract class Example<T extends Comparable<T>> {
+public abstract class SortBase<T extends Comparable<T>> {
 
     public abstract void sort(T[] a, int lo, int hi);
 

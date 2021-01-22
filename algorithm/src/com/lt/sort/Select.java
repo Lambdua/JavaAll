@@ -5,7 +5,7 @@ package com.lt.sort;
  * @description 选择排序实现
  * @date 2021年01月20 11:07
  **/
-public class Select<T extends Comparable<T>> extends Example<T> {
+public class Select<T extends Comparable<T>> extends SortBase<T> {
 
     @Override
     public void sort(T[] a, int lo, int hi) {

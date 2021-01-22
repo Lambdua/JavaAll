@@ -11,8 +11,8 @@ import java.util.List;
 public class Test {
     public static void main(String[] args) {
         //-12 -4 0 1 2 3 5 7 8 12 32
-        List<Example<Integer>> list = Arrays.asList(new Select<>(), new Insert<>(), new Shell<>(), new MergeImpl2<>(), new Quick<>());
-        for (Example<Integer> sort : list) {
+        List<SortBase<Integer>> list = Arrays.asList(new Select<>(), new Insert<>(), new Shell<>(), new MergeImpl2<>(), new Quick<>());
+        for (SortBase<Integer> sort : list) {
             System.out.print(sort.getClass().getSimpleName()+": ");
             sort.testCorrectness(new Integer[]{3, 2, 1, 5, 7, 8, 32, 12, 0, -4, -12});
         }

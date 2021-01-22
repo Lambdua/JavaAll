@@ -5,7 +5,7 @@ package com.lt.sort;
  * @description 希尔排序
  * @Date 2021/1/20
  **/
-public class Shell<T extends Comparable<T>> extends Example<T> {
+public class Shell<T extends Comparable<T>> extends SortBase<T> {
     @Override
     public void sort(T[] a, int lo, int hi) {
         int N = a.length;

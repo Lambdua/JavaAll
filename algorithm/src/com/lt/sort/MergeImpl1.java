@@ -7,7 +7,7 @@ import java.util.Arrays;
  * @description 自顶向下的归并
  * @date 2021年01月21 10:04
  **/
-public class MergeImpl1<T extends Comparable<T>> extends Example<T> {
+public class MergeImpl1<T extends Comparable<T>> extends SortBase<T> {
 
     @Override
     public void sort(T[] a, int lo, int hi) {
