@@ -1,4 +1,4 @@
-package com.lt.creational.factory.pizza;
+package com.lt.creational.simplefactory.pizza;
 
 /**
  * @author liangtao

@@ -1,4 +1,4 @@
-package com.lt.creational.factory.pizza.model;
+package com.lt.creational.simplefactory.pizza.model;
 
 import lombok.Getter;
 import lombok.Setter;

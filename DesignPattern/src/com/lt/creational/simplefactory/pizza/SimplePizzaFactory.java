@@ -1,8 +1,8 @@
-package com.lt.creational.factory.pizza;
+package com.lt.creational.simplefactory.pizza;
 
-import com.lt.creational.factory.pizza.model.CheesePizza;
-import com.lt.creational.factory.pizza.model.GreekPizza;
-import com.lt.creational.factory.pizza.model.Pizza;
+import com.lt.creational.simplefactory.pizza.model.CheesePizza;
+import com.lt.creational.simplefactory.pizza.model.GreekPizza;
+import com.lt.creational.simplefactory.pizza.model.Pizza;
 
 /**
  * @author liangtao
