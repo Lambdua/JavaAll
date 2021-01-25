@@ -1,4 +1,4 @@
-package com.lt.base;
+package com.lt.base.stack;
 
 import java.util.Iterator;
 

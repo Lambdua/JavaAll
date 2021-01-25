@@ -1,5 +1,9 @@
 package com.lt.base;
 
+import com.lt.base.queue.Queue;
+import com.lt.base.queue.QueueByLink;
+import com.lt.base.stack.Stack;
+import com.lt.base.stack.StackByArray;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
@@ -10,7 +14,26 @@ import edu.princeton.cs.algs4.StdOut;
  **/
 public class BaseTest {
     public static void main(String[] args) {
-        stackTest();
+//        stackTest();
+        queueTest();
+    }
+
+    public static void queueTest() {
+        // 创建一个队列并操作字符串入列或出列
+        Queue<String> q = new QueueByLink<>();
+        while (!StdIn.isEmpty()) {
+            String item = StdIn.readString();
+            if (item.equals("show")) {
+                for (String s : q) {
+                    System.out.print(s + " ");
+                }
+                System.out.println();
+            } else if (!item.equals("-"))
+                q.enqueue(item);
+            else if (!q.isEmpty()) StdOut.print(q.dequeue() + " ");
+        }
+        StdOut.println("(" + q.size() + " left on queue)");
+
     }
 
     public static void stackTest() {
