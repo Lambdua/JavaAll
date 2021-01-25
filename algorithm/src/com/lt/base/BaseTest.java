@@ -15,10 +15,16 @@ public class BaseTest {
 
     public static void stackTest() {
         // 创建一个栈并根据StdIn中的指示压入或弹出字符串
-        StackByLink<String> s = new StackByLink<>();
+        Stack<String> s = new StackByArray<>();
         while (!StdIn.isEmpty()) {
             String item = StdIn.readString();
-            if (!item.equals("-"))
+            if (item.equals("show")) {
+                for (String st : s) {
+                    System.out.print(st + " ");
+                }
+                System.out.println();
+
+            } else if (!item.equals("-"))
                 s.push(item);
             else if (!s.isEmpty()) StdOut.print(s.pop() + " ");
         }

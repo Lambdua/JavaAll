@@ -1,6 +1,5 @@
 package com.lt.base;
 
-import java.lang.reflect.Array;
 import java.util.Iterator;
 
 /**
@@ -11,21 +10,30 @@ import java.util.Iterator;
 public class StackByArray<Item> implements Stack<Item> {
     private Item[] array;
     private int N = 0;
-    private int left = 0;
-    private Class<Item> type;
 
     public StackByArray() {
-        array = (Item[]) Array.newInstance(type, 10);
+        array = (Item[]) new Object[10];
     }
 
-    public StackByArray(Class<Item> type, int size) {
-        this.type = type;
-        array = (Item[]) Array.newInstance(type, size);
+    public StackByArray(int size) {
+        array = (Item[]) new Object[size];
     }
 
     @Override
     public Iterator<Item> iterator() {
-        return null;
+        return new Iterator<Item>() {
+            int i = 0;
+
+            @Override
+            public boolean hasNext() {
+                return i < N;
+            }
+
+            @Override
+            public Item next() {
+                return array[i++];
+            }
+        };
     }
 
     @Override
@@ -40,16 +48,27 @@ public class StackByArray<Item> implements Stack<Item> {
 
     @Override
     public void push(Item item) {
+        checkCapacity();
         array[N++] = item;
+    }
+
+    private void checkCapacity() {
+        if (N == array.length) {
+            resize(2 * N);
+        }
     }
 
     @Override
     public Item pop() {
-        return array[N--];
+        Item item = array[--N];
+        //避免对象游离
+        array[N] = null;
+        if (N > 0 && N == array.length / 4) resize(array.length / 2);
+        return item;
     }
 
-    private void expansion() {
-        Item[] newArray = (Item[]) Array.newInstance(type, array.length * 2);
+    private void resize(int size) {
+        Item[] newArray = (Item[]) new Object[size];
         System.arraycopy(array, 0, newArray, 0, N);
         array = newArray;
     }
