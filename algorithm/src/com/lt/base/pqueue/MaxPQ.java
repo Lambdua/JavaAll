@@ -21,10 +21,12 @@ public class MaxPQ<key extends Comparable<key>> implements PrimaryQueueBase<key>
 
     @Override
     public void insert(key key) {
+        checkCapacity();
         pq[++N] = key;
         //新增的节点在最底下，进行上浮操作
         swim(N);
     }
+
 
     @Override
     public key max() {
@@ -40,6 +42,7 @@ public class MaxPQ<key extends Comparable<key>> implements PrimaryQueueBase<key>
         pq[N--] = null;
         //下沉操作,恢复堆的有序性
         sink(1);
+        if (N > 0 && N == pq.length >> 2) resize(pq.length >> 1);
         return max;
     }
 
@@ -121,5 +124,16 @@ public class MaxPQ<key extends Comparable<key>> implements PrimaryQueueBase<key>
         sink(j);
     }
 
+    private void checkCapacity() {
+        if (N == pq.length) {
+            resize(2 * N);
+        }
+    }
+
+    private void resize(int size) {
+        key[] newArray = (key[]) new Comparable[size];
+        System.arraycopy(pq, 0, newArray, 0, N);
+        pq = newArray;
+    }
 
 }

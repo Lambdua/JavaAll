@@ -54,7 +54,7 @@ public class StackByArray<Item> implements Stack<Item> {
 
     private void checkCapacity() {
         if (N == array.length) {
-            resize(2 * N);
+            resize(N << 1);
         }
     }
 
@@ -63,7 +63,7 @@ public class StackByArray<Item> implements Stack<Item> {
         Item item = array[--N];
         //避免对象游离
         array[N] = null;
-        if (N > 0 && N == array.length / 4) resize(array.length / 2);
+        if (N > 0 && N == array.length >> 2) resize(array.length >> 1);
         return item;
     }
 
