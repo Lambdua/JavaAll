@@ -19,15 +19,15 @@ public class SortCompare {
         sortMap.put("select", new Select<>());
         sortMap.put("shell", new Shell<>());
         sortMap.put("merge1", new MergeImpl1<>());
-        sortMap.put("merge2", new MergeImpl2<>());
+//        sortMap.put("merge2", new MergeImpl2<>());
         sortMap.put("merge2", new MergeImpl2<>());
         sortMap.put("quick", new Quick<>());
-        sortMap.put("heap", null);
+        sortMap.put("heap", new HeapSort<>());
     }
 
     public static double time(String alg, Double[] a) {
         long start = System.currentTimeMillis();
-        sortMap.get(alg).sort(a);
+        sortMap.get(alg).testCorrectness(a);
         return (start - System.currentTimeMillis()) / 1000.0;
     }
 
@@ -44,8 +44,7 @@ public class SortCompare {
     }
 
     public static void main(String[] args) {
-        args = new String[]{"merge1", "quick", "2009", "20"};
-        for (int i = 0; i < 20; i++) {
+        args = new String[]{"quick", "heap", "10001", "20"};
             StdOut.println("--------------");
             String alg1 = args[0];
             String alg2 = args[1];
@@ -55,7 +54,6 @@ public class SortCompare {
             double t2 = timeRandomInput(alg2, N, T);
             StdOut.printf("For %d random Doubles\n %s is", N, alg1);
             StdOut.printf(" %.1f times faster than %s\n", t2 / t1, alg2);
-        }
 
     }
 }
