@@ -1,5 +1,6 @@
 package com.lt.base;
 
+import com.lt.base.pqueue.MaxPQ;
 import com.lt.base.queue.Queue;
 import com.lt.base.queue.QueueByLink;
 import com.lt.base.stack.Stack;
@@ -15,7 +16,8 @@ import edu.princeton.cs.algs4.StdOut;
 public class BaseTest {
     public static void main(String[] args) {
 //        stackTest();
-        queueTest();
+//        queueTest();
+        maxPQTest();
     }
 
     public static void queueTest() {
@@ -52,5 +54,15 @@ public class BaseTest {
             else if (!s.isEmpty()) StdOut.print(s.pop() + " ");
         }
         StdOut.println("(" + s.size() + " left on stack)");
+    }
+
+    public static void maxPQTest() {
+        MaxPQ<Integer> pq = new MaxPQ<>();
+        while (!StdIn.isEmpty()) {
+            String item = StdIn.readString();
+            if (!item.equals("-")) pq.insert(Integer.valueOf(item));
+            else if (!pq.isEmpty()) StdOut.print(pq.delMax() + " ");
+        }
+        StdOut.println("(" + pq.size() + " left on pq)");
     }
 }

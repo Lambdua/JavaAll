@@ -1,4 +1,4 @@
-package com.lt.queue;
+package com.lt.base.pqueue;
 
 /**
  * @author liangtao

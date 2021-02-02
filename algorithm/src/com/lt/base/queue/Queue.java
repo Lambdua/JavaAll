@@ -2,7 +2,7 @@ package com.lt.base.queue;
 
 /**
  * @author liangtao
- * @description 队列
+ * @description 队列(先进先出)
  * @Date 2021/1/25
  **/
 public interface Queue<Item> extends Iterable<Item> {
