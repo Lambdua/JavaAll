@@ -1,4 +1,4 @@
-package com.lt.structural.adapter.instance1.adaptee;
+package com.lt.structural.adapter.adaptee;
 
 /**
  * @author liangtao
