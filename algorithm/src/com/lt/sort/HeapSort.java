@@ -16,7 +16,7 @@ public class HeapSort<T extends Comparable<T>> extends SortBase<T> {
             sink(a, i, N - 1);
         }
 
-        while (N > 1) {
+        while (N > 0) {
             exch(a, 0, --N);
             sink(a, 0, N);
         }
@@ -31,12 +31,11 @@ public class HeapSort<T extends Comparable<T>> extends SortBase<T> {
      */
     private void sink(T[] a, int lo, int hi) {
         //找到左子节点
-        int j = (lo << 1);
-        if (j > hi) return;
+        int j = (lo << 1) + 1;
         //当前节点有右子节点且左节点小于右节点
         if (j < hi && less(a[j], a[j + 1])) j++;
         //如果子节点小于父节点 不进行替换
-        if (less(a[j], a[lo])) return;
+        if (j >= hi || !less(a[lo], a[j])) return;
         //替换
         exch(a, j, lo);
         //递归下称
