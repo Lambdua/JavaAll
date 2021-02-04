@@ -69,6 +69,6 @@ public abstract class SortBase<T extends Comparable<T>> {
     public void testCorrectness(T[] a) {
         sort(a);
         isSorted(a);
-        show(a);
+//        show(a);
     }
 }

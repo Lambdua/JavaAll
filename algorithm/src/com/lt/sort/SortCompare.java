@@ -19,7 +19,6 @@ public class SortCompare {
         sortMap.put("select", new Select<>());
         sortMap.put("shell", new Shell<>());
         sortMap.put("merge1", new MergeImpl1<>());
-//        sortMap.put("merge2", new MergeImpl2<>());
         sortMap.put("merge2", new MergeImpl2<>());
         sortMap.put("quick", new Quick<>());
         sortMap.put("heap", new HeapSort<>());
@@ -44,7 +43,7 @@ public class SortCompare {
     }
 
     public static void main(String[] args) {
-        args = new String[]{"quick", "heap", "10001", "20"};
+        args = new String[]{"heap", "quick", "10001", "10"};
             StdOut.println("--------------");
             String alg1 = args[0];
             String alg2 = args[1];
