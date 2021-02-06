@@ -11,19 +11,24 @@ public interface OrderedST<K extends Comparable<K>, V> extends ST<K, V> {
 
     K min();
 
-
-    void delMin();
-
+    default V delMin() {
+        return delete(min());
+    }
 
     K max();
 
-    void delMax();
-
+    default V delMax() {
+        return delete(max());
+    }
 
     /**
      * 获取[lo..hi]之间的键的数量
      */
-    int size(K lo, K hi);
+    default int size(K lo, K hi) {
+        if (lo.compareTo(hi) > 0) return 0;
+        if (contains(hi)) return rank(hi) - rank(lo) + 1;
+        return rank(hi) - rank(lo);
+    }
 
     /**
      * 获取小于等于K的最大键
@@ -39,7 +44,12 @@ public interface OrderedST<K extends Comparable<K>, V> extends ST<K, V> {
      * 小于key的键的数量
      */
     int rank(K key);
-
+    /**
+     *
+     * 对于 0到size()-1的所有索引 i 都有一下两个特性：
+     * 1. i==rank(select(i))
+     * 2. k==select(rank(key))
+     */
     /**
      * 获取排名位k的键
      */
@@ -50,4 +60,8 @@ public interface OrderedST<K extends Comparable<K>, V> extends ST<K, V> {
      */
     Iterable<K> keys(K lo, K hi);
 
+    @Override
+    default Iterable<K> keys() {
+        return keys(min(), max());
+    }
 }

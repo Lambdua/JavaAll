@@ -1,9 +1,9 @@
-package com.lt.structural.adapter.adapter;
+package com.lt.structural.adapt.adapter;
 
-import com.lt.structural.adapter.adaptee.AdviseMediaPlayer;
-import com.lt.structural.adapter.adaptee.DlcPlayer;
-import com.lt.structural.adapter.adaptee.Mp4Player;
-import com.lt.structural.adapter.target.MediaPlayer;
+import com.lt.structural.adapt.adaptee.AdviseMediaPlayer;
+import com.lt.structural.adapt.adaptee.DlcPlayer;
+import com.lt.structural.adapt.adaptee.Mp4Player;
+import com.lt.structural.adapt.target.MediaPlayer;
 
 /**
  * @author liangtao

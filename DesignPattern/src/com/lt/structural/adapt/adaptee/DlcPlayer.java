@@ -1,4 +1,4 @@
-package com.lt.structural.adapter.adaptee;
+package com.lt.structural.adapt.adaptee;
 
 /**
  * @author liangtao

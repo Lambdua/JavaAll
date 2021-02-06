@@ -1,7 +1,5 @@
 package com.lt.base.symbol;
 
-import java.security.Key;
-
 /**
  * @author liangtao
  * @description 符号表抽象接口
@@ -30,5 +28,5 @@ public interface ST<K, V>{
     }
 
 
-    Iterable<Key> keys();
+    Iterable<K> keys();
 }
