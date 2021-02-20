@@ -57,12 +57,17 @@ public class BinarySearchST<K extends Comparable<K>, V> implements OrderedST<K, 
 
     @Override
     public K floor(K key) {
-        return null;
+        int i = rank(key);
+        if (i-1>=0){
+            return keys[i-1];
+        }else {
+            return null;
+        }
     }
 
     @Override
     public K ceiling(K key) {
-        return null;
+        return keys[rank(key)];
     }
 
     /**
