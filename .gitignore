@@ -28,3 +28,8 @@ gen
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/algorithm/source/leipzig1M.txt
+/algorithm/source/leipzig100K.txt
+/algorithm/source/leipzig300K.txt
+/algorithm/source/tale.txt
+/algorithm/source/tinyTale.txt
