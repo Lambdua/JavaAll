@@ -6,8 +6,8 @@ import com.lt.base.queue.Queue;
 import com.lt.base.queue.QueueByLink;
 import com.lt.base.stack.Stack;
 import com.lt.base.stack.StackByArray;
+import com.lt.base.symbol.BinarySearchST;
 import com.lt.base.symbol.ST;
-import com.lt.base.symbol.SequentialSearchST;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
@@ -25,8 +25,8 @@ public class BaseTest {
 //        maxPQTest();
 //        stBehaviorTest();
 //        stPerformanceTest(12);
-//        stBehaviorTest("tinyTale.txt",new SequentialSearchST<>());
-        stPerformanceTest(1, "tinyTale.txt", new SequentialSearchST<>());
+        stBehaviorTest("tinyTale.txt",new BinarySearchST<>());
+//        stPerformanceTest(1, "tinyTale.txt", new SequentialSearchST<>());
     }
 
     /**
@@ -118,7 +118,6 @@ public class BaseTest {
             if (st.contains(word)) st.put(word, st.get(word) + 1);
             else st.put(word, 1);
         }
-
         String maxKey = " ";
         st.put(maxKey, 0);
         for (String word : st.keys()) {
@@ -130,8 +129,8 @@ public class BaseTest {
     }
 
     private static void initialSystemIn(String sourceName) throws IOException {
-        System.in.close();
+//        System.in.close();
         //初始化system.in
-        System.setIn(BaseTest.class.getClassLoader().getResourceAsStream(sourceName));
+//        System.setIn(BaseTest.class.getClassLoader().getResourceAsStream(sourceName));
     }
 }
