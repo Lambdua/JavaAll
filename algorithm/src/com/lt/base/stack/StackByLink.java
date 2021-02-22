@@ -1,6 +1,7 @@
 package com.lt.base.stack;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * @author liangtao
@@ -23,6 +24,9 @@ public class StackByLink<Item> implements Stack<Item> {
 
             @Override
             public Item next() {
+                if (!hasNext()){
+                    throw new NoSuchElementException();
+                }
                 Item item = current.item;
                 current = current.next;
                 return item;
