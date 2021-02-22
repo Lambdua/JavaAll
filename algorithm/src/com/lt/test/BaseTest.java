@@ -6,8 +6,10 @@ import com.lt.base.queue.Queue;
 import com.lt.base.queue.QueueByLink;
 import com.lt.base.stack.Stack;
 import com.lt.base.stack.StackByArray;
-import com.lt.base.symbol.BinarySearchST;
+import com.lt.base.symbol.BST;
+import com.lt.base.symbol.OrderedST;
 import com.lt.base.symbol.ST;
+import com.lt.util.DataIn;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
@@ -17,14 +19,16 @@ import edu.princeton.cs.algs4.StdOut;
  * @date 2021年01月25 16:41
  **/
 public class BaseTest {
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
 //        stackTest();
 //        queueTest();
 //        maxPQTest();
 //        stBehaviorTest();
 //        stPerformanceTest(12);
-        stBehaviorTest("tinyTale.txt", new BinarySearchST<>());
-//        stPerformanceTest(1, "tinyTale.txt", new SequentialSearchST<>());
+//        stBehaviorTest("leipzig100K.txt", new BinarySearchST<>());
+//        stBehaviorTest("tale.txt", new BST<>());
+//        stPerformanceTest(1, "tale.txt", new BST<>());
+        orderStPerformanceTest(1, "tale.txt", new BST<>());
     }
 
     /**
@@ -91,10 +95,10 @@ public class BaseTest {
      *
      * @param sourceName 测试数据source目录下的名称
      */
-    public static void stBehaviorTest(String sourceName, ST<String, Integer> st)  {
-        initialSystemIn(sourceName);
-        for (int i = 0; !StdIn.isEmpty(); i++) {
-            String key = StdIn.readString();
+    public static void stBehaviorTest(String sourceName, ST<String, Integer> st) {
+        DataIn dataIn = new DataIn(sourceName);
+        for (int i = 0; !dataIn.isEmpty(); i++) {
+            String key = dataIn.readString();
             st.put(key, i);
         }
         //对于有序的符号表实现，元素的输出顺序是确定的,无序的符号表输出则是不确定的
@@ -109,9 +113,9 @@ public class BaseTest {
      * @param sourceName 测试数据source目录下的名称
      */
     public static void stPerformanceTest(int minLen, String sourceName, ST<String, Integer> st) {
-        initialSystemIn(sourceName);
-        while (!StdIn.isEmpty()) {
-            String word = StdIn.readString();
+        DataIn dataIn = new DataIn(sourceName);
+        while (!dataIn.isEmpty()) {
+            String word = dataIn.readString();
             if (word.length() < minLen) continue;
             if (st.contains(word)) st.put(word, st.get(word) + 1);
             else st.put(word, 1);
@@ -126,10 +130,49 @@ public class BaseTest {
         StdOut.println(maxKey + "-->" + st.get(maxKey));
     }
 
-    private static void initialSystemIn(String sourceName) {
-        StdOut.println(sourceName);
-//        System.in.close();
-        //初始化system.in
-//        System.setIn(BaseTest.class.getClassLoader().getResourceAsStream(sourceName));
+    public static void orderStPerformanceTest(int minLen, String sourceName, OrderedST<String, Integer> st) {
+        DataIn dataIn = new DataIn(sourceName);
+        while (!dataIn.isEmpty()) {
+            String word = dataIn.readString();
+            if (word.length() < minLen) continue;
+            if (st.contains(word)) st.put(word, st.get(word) + 1);
+            else st.put(word, 1);
+        }
+
+
+        DataIn trueDataIn = new DataIn(sourceName);
+        edu.princeton.cs.algs4.BST<String,Integer> trueBst=new edu.princeton.cs.algs4.BST();
+        while (!trueDataIn.isEmpty()) {
+            String word = trueDataIn.readString();
+            if (word.length() < minLen) continue;
+            if (trueBst.contains(word)) trueBst.put(word, trueBst.get(word) + 1);
+            else trueBst.put(word, 1);
+        }
+
+        StdOut.println(st.min() + "-> " + st.get(st.min()));
+        StdOut.println(trueBst.min() + "-> " + trueBst.get(trueBst.min()));
+
+        StdOut.println(st.max() + "->" + st.get(st.max()));
+        StdOut.println(trueBst.max() + "->" + trueBst.get(trueBst.max()));
+
+        StdOut.println("rank->"+st.rank("c"));
+        StdOut.println("rank->"+trueBst.rank("c"));
+
+        StdOut.println("floor->"+st.floor("c"));
+        StdOut.println("floor->"+trueBst.floor("c"));
+
+        StdOut.println("ceiling->"+st.ceiling("c"));
+        StdOut.println("ceiling->"+trueBst.ceiling("c"));
+
+        StdOut.println("select->"+st.select(12));
+        StdOut.println("select->"+trueBst.select(12));
+
+        st.delMax();
+        ((BST)st).check();
+        trueBst.deleteMax();
+
+
     }
+
+
 }
