@@ -17,7 +17,7 @@ import java.util.NoSuchElementException;
 public class BinarySearchST<K extends Comparable<K>, V> implements OrderedST<K, V> {
     K[] keys;
     V[] values;
-    private int N;
+    private int size;
 
     public BinarySearchST() {
         this(10);
@@ -41,26 +41,26 @@ public class BinarySearchST<K extends Comparable<K>, V> implements OrderedST<K, 
         }
         int i = rank(key);
         V v = values[i];
-        for (int j = i; j < N; j++) {
+        for (int j = i; j < size; j++) {
             keys[j] = keys[j + 1];
             values[j] = values[j + 1];
         }
-        if (N > 0 && N == keys.length >> 2) resize(N >> 1);
+        if (size > 0 && size == keys.length >> 2) resize(size >> 1);
         return v;
     }
 
     @Override
     public K max() {
         if (isEmpty()) return null;
-        return keys[N - 1];
+        return keys[size - 1];
     }
 
     @Override
     public K floor(K key) {
         int i = rank(key);
-        if (i-1>=0){
-            return keys[i-1];
-        }else {
+        if (i - 1 >= 0) {
+            return keys[i - 1];
+        } else {
             return null;
         }
     }
@@ -75,7 +75,9 @@ public class BinarySearchST<K extends Comparable<K>, V> implements OrderedST<K, 
      */
     @Override
     public int rank(K key) {
-        int left = 0, right = N - 1, mid;
+        int left = 0;
+        int right = size - 1;
+        int mid;
         while (left <= right) {
             mid = left + (right - left) / 2;
             int cmp = keys[mid].compareTo(key);
@@ -116,20 +118,20 @@ public class BinarySearchST<K extends Comparable<K>, V> implements OrderedST<K, 
     public void put(K key, V value) {
         //1. 查找键，找到直接更新返回
         int i = rank(key);
-        if (i < N && keys[i].compareTo(key) == 0) {
+        if (i < size && keys[i].compareTo(key) == 0) {
             values[i] = value;
             return;
         }
         checkCapacity();
         //2. 没找到，从i开始 后续所有键后移一位
-        for (int j = N; j > i; j--) {
+        for (int j = size; j > i; j--) {
             keys[j] = keys[j - 1];
             values[j] = values[j - 1];
         }
         //3. 插入
         keys[i] = key;
         values[i] = value;
-        N++;
+        size++;
     }
 
     @Override
@@ -138,27 +140,27 @@ public class BinarySearchST<K extends Comparable<K>, V> implements OrderedST<K, 
         //找到k的索引位置
         int i = rank(key);
         //k索引不越界且等于keys[i]
-        if (i < N && keys[i].compareTo(key) == 0) return values[i];
+        if (i < size && keys[i].compareTo(key) == 0) return values[i];
         else return null;
     }
 
     @Override
     public int size() {
-        return N;
+        return size;
     }
 
     private void checkCapacity() {
-        if (N == keys.length) {
-            resize(N << 1);
+        if (size == keys.length) {
+            resize(size << 1);
         }
     }
 
     private void resize(int size) {
         K[] kArray = (K[]) new Comparable[size];
-        System.arraycopy(keys, 0, kArray, 0, N);
+        System.arraycopy(keys, 0, kArray, 0, this.size);
         keys = kArray;
         V[] vArray = (V[]) new Object[size];
-        System.arraycopy(values, 0, vArray, 0, N);
+        System.arraycopy(values, 0, vArray, 0, this.size);
         values = vArray;
     }
 

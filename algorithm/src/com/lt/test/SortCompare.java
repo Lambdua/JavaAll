@@ -1,5 +1,6 @@
-package com.lt.sort;
+package com.lt.test;
 
+import com.lt.sort.*;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
 

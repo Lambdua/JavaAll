@@ -11,21 +11,19 @@ import com.lt.base.symbol.ST;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
-import java.io.IOException;
-
 /**
  * @author liangtao
  * @description
  * @date 2021年01月25 16:41
  **/
 public class BaseTest {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args)  {
 //        stackTest();
 //        queueTest();
 //        maxPQTest();
 //        stBehaviorTest();
 //        stPerformanceTest(12);
-        stBehaviorTest("tinyTale.txt",new BinarySearchST<>());
+        stBehaviorTest("tinyTale.txt", new BinarySearchST<>());
 //        stPerformanceTest(1, "tinyTale.txt", new SequentialSearchST<>());
     }
 
@@ -39,9 +37,9 @@ public class BaseTest {
             String item = StdIn.readString();
             if (item.equals("show")) {
                 for (String s : q) {
-                    System.out.print(s + " ");
+                    StdOut.print(s + " ");
                 }
-                System.out.println();
+                StdOut.println();
             } else if (!item.equals("-"))
                 q.enqueue(item);
             else if (!q.isEmpty()) StdOut.print(q.dequeue() + " ");
@@ -60,9 +58,9 @@ public class BaseTest {
             String item = StdIn.readString();
             if (item.equals("show")) {
                 for (String st : s) {
-                    System.out.print(st + " ");
+                    StdOut.print(st + " ");
                 }
-                System.out.println();
+                StdOut.println();
 
             } else if (!item.equals("-"))
                 s.push(item);
@@ -93,7 +91,7 @@ public class BaseTest {
      *
      * @param sourceName 测试数据source目录下的名称
      */
-    public static void stBehaviorTest(String sourceName, ST<String, Integer> st) throws IOException {
+    public static void stBehaviorTest(String sourceName, ST<String, Integer> st)  {
         initialSystemIn(sourceName);
         for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
@@ -110,7 +108,7 @@ public class BaseTest {
      * @param minLen     筛选的单词最小长度
      * @param sourceName 测试数据source目录下的名称
      */
-    public static void stPerformanceTest(int minLen, String sourceName, ST<String, Integer> st) throws IOException {
+    public static void stPerformanceTest(int minLen, String sourceName, ST<String, Integer> st) {
         initialSystemIn(sourceName);
         while (!StdIn.isEmpty()) {
             String word = StdIn.readString();
@@ -128,7 +126,8 @@ public class BaseTest {
         StdOut.println(maxKey + "-->" + st.get(maxKey));
     }
 
-    private static void initialSystemIn(String sourceName) throws IOException {
+    private static void initialSystemIn(String sourceName) {
+        StdOut.println(sourceName);
 //        System.in.close();
         //初始化system.in
 //        System.setIn(BaseTest.class.getClassLoader().getResourceAsStream(sourceName));

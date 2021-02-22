@@ -8,13 +8,13 @@ import java.util.NoSuchElementException;
  * @description 下压栈 链表实现
  * @date 2021年01月25 16:02
  **/
-public class StackByLink<Item> implements Stack<Item> {
+public class StackByLink<I> implements Stack<I> {
     private Node first;
-    private int N;
+    private int size;
 
     @Override
-    public Iterator<Item> iterator() {
-        return new Iterator<Item>() {
+    public Iterator<I> iterator() {
+        return new Iterator<I>() {
             private Node current = first;
 
             @Override
@@ -23,11 +23,11 @@ public class StackByLink<Item> implements Stack<Item> {
             }
 
             @Override
-            public Item next() {
+            public I next() {
                 if (!hasNext()){
                     throw new NoSuchElementException();
                 }
-                Item item = current.item;
+                I item = current.item;
                 current = current.next;
                 return item;
             }
@@ -42,29 +42,29 @@ public class StackByLink<Item> implements Stack<Item> {
 
     @Override
     public int size() {
-        return N;
+        return size;
     }
 
     @Override
-    public void push(Item item) {
+    public void push(I item) {
         Node oldFirst = first;
         first = new Node();
         first.item = item;
         first.next = oldFirst;
-        N++;
+        size++;
     }
 
     @Override
-    public Item pop() {
-        Item item = first.item;
+    public I pop() {
+        I item = first.item;
         first = first.next;
-        N--;
+        size--;
         return item;
     }
 
 
     private class Node {
-        Item item;
+        I item;
         Node next;
     }
 }

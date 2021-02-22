@@ -6,12 +6,12 @@ package com.lt.base.stack;
  * @date 2021年01月25 16:52
  **/
 
-public interface Stack<Item> extends Iterable<Item> {
+public interface Stack<I> extends Iterable<I> {
     boolean isEmpty();
 
     int size();
 
-    void push(Item item);
+    void push(I item);
 
-    Item pop();
+    I pop();
 }

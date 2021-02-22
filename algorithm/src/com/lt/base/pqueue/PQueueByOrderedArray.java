@@ -6,37 +6,38 @@ import com.lt.base.stack.StackByArray;
 /**
  * @author liangtao
  * @description 有序数组实现优先队列
+ * todo  没有实现,不记得什么时候写的这个东东了。放这里吧
  * @date 2021年02月01 09:31
  **/
-public class PQueueByOrderedArray<key extends Comparable<key>> implements PrimaryQueueBase<key> {
-    private Stack<key> innerStack;
+public class PQueueByOrderedArray<K extends Comparable<K>> implements PrimaryQueueBase<K> {
+    private Stack<K> innerStack;
 
     public PQueueByOrderedArray() {
         this.innerStack = new StackByArray<>();
     }
 
     @Override
-    public void insert(key key) {
+    public void insert(K key) {
 
     }
 
     @Override
-    public key max() {
+    public K max() {
         return null;
     }
 
     @Override
-    public key delMax() {
+    public K delMax() {
         return innerStack.pop();
     }
 
     @Override
-    public key min() {
+    public K min() {
         return null;
     }
 
     @Override
-    public key delMin() {
+    public K delMin() {
         return null;
     }
 

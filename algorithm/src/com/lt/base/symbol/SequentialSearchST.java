@@ -12,7 +12,7 @@ public class SequentialSearchST<K extends Comparable<K>, V> implements ST<K, V> 
     /**
      * 节点数量
      */
-    private int N = 0;
+    private int size = 0;
     /**
      * 链表表头
      */
@@ -43,7 +43,7 @@ public class SequentialSearchST<K extends Comparable<K>, V> implements ST<K, V> 
         }
         // 未命中，新建结点
         first = new Node(key, value, first);
-        N++;
+        size++;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class SequentialSearchST<K extends Comparable<K>, V> implements ST<K, V> 
 
     @Override
     public int size() {
-        return N;
+        return size;
     }
 
     @Override

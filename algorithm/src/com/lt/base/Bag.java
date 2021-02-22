@@ -1,6 +1,7 @@
 package com.lt.base;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * @author liangtao
@@ -16,22 +17,22 @@ import java.util.Iterator;
  * 不重要。
  * @date 2021年01月22 14:06
  **/
-public class Bag<Item> implements Iterable<Item> {
+public class Bag<I> implements Iterable<I> {
     private Node first;
 
     private class Node {
-        Item item;
+        I item;
         Node next;
     }
-    public void add(Item item) {
+    public void add(I item) {
         Node oldfirst = first;
         first = new Node();
         first.item = item;
         first.next = oldfirst;
     }
     @Override
-    public Iterator<Item> iterator() {
-        return new Iterator<Item>() {
+    public Iterator<I> iterator() {
+        return new Iterator<I>() {
             private Node current = first;
 
             @Override
@@ -40,8 +41,11 @@ public class Bag<Item> implements Iterable<Item> {
             }
 
             @Override
-            public Item next() {
-                Item item = current.item;
+            public I next() {
+                if (!hasNext()){
+                    throw new NoSuchElementException();
+                }
+                I item = current.item;
                 current = current.next;
                 return item;
             }

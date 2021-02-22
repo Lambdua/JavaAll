@@ -19,7 +19,8 @@ public class MergeImpl2<T extends Comparable<T>> extends SortBase<T> {
 
     private void merge(T[] a, int lo, int mid, int hi) {
         if (less(a[mid], a[mid + 1])) return;
-        int i = 0, j = mid - lo+1;
+        int i = 0;
+        int j = mid - lo+1;
         T[] aux = Arrays.copyOfRange(a, lo, hi + 1);
         for (int l = lo; l <= hi; l++) {
             if (i + lo > mid) a[l] = aux[j++];

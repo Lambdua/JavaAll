@@ -10,17 +10,17 @@ public class HeapSort<T extends Comparable<T>> extends SortBase<T> {
     @Override
     public void sort(T[] a, int lo, int hi) {
         //总数
-        int N = hi - lo + 1;
+        int size = hi - lo + 1;
 
         //进行除了单节点以外的所有多节点的堆序列化
-        for (int i = (N / 2 + lo) - 1; i >= lo; i--) {
-            sink(a, i, N - 1);
+        for (int i = (size / 2 + lo) - 1; i >= lo; i--) {
+            sink(a, i, size - 1);
         }
 
         //将最大的[0]节点和末尾互换，然后进行除了末尾以外的下沉操作，来查找到第二大的元素。
-        while (N > 0) {
-            exch(a, 0, --N);
-            sink(a, 0, N);
+        while (size > 0) {
+            exch(a, 0, --size);
+            sink(a, 0, size);
         }
     }
 

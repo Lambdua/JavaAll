@@ -5,13 +5,13 @@ package com.lt.base.pqueue;
  * @description 基于堆的优先队列
  * @date 2021年02月01 09:46
  **/
-public class MaxPQ<key extends Comparable<key>> implements PrimaryQueueBase<key> {
-    private key[] pq;
-    private int N = 0;
+public class MaxPQ<K extends Comparable<K>> implements PrimaryQueueBase<K> {
+    private K[] pq;
+    private int size;
 
     public MaxPQ(int size) {
         //这里取size+1，堆排序中不使用0索引
-        this.pq = (key[]) new Comparable[size + 1];
+        this.pq = (K[]) new Comparable[size + 1];
     }
 
     public MaxPQ() {
@@ -20,45 +20,45 @@ public class MaxPQ<key extends Comparable<key>> implements PrimaryQueueBase<key>
 
 
     @Override
-    public void insert(key key) {
+    public void insert(K key) {
         checkCapacity();
-        pq[++N] = key;
+        pq[++size] = key;
         //新增的节点在最底下，进行上浮操作
-        swim(N);
+        swim(size);
     }
 
 
     @Override
-    public key max() {
+    public K max() {
         return pq[1];
     }
 
     @Override
-    public key delMax() {
-        key max = pq[1];
+    public K delMax() {
+        K max = pq[1];
         //将1放入到最后的位置
-        exch(1, N);
+        exch(1, size);
         //这里要先置空，否则下沉操作会使max重新回到1索引避免对象游离
-        pq[N--] = null;
+        pq[size--] = null;
         //下沉操作,恢复堆的有序性
         sink(1);
-        if (N > 0 && N == pq.length >> 2) resize(pq.length >> 1);
+        if (size > 0 && size == pq.length >> 2) resize(pq.length >> 1);
         return max;
     }
 
     @Override
-    public key min() {
+    public K min() {
         return null;
     }
 
     @Override
-    public key delMin() {
+    public K delMin() {
         return null;
     }
 
     @Override
     public int size() {
-        return N;
+        return size;
     }
 
     /**
@@ -79,7 +79,7 @@ public class MaxPQ<key extends Comparable<key>> implements PrimaryQueueBase<key>
      * @date 2021/2/1
      **/
     private void exch(int i, int j) {
-        key temp = pq[i];
+        K temp = pq[i];
         pq[i] = pq[j];
         pq[j] = temp;
     }
@@ -114,10 +114,10 @@ public class MaxPQ<key extends Comparable<key>> implements PrimaryQueueBase<key>
      **/
     private void sink(int k) {
         int j = k << 1;
-        if (j > N) return;
+        if (j > size) return;
         //和子节点中较大的一个进行互换，确保互换后父节点比子节点都大
         //这里j+1可能越界,所以要确保J+1不越界，即j<N
-        if (j < N && less(j, j + 1)) j++;
+        if (j < size && less(j, j + 1)) j++;
         //递归出口
         if (!less(k, j)) return;
         exch(j, k);
@@ -125,14 +125,14 @@ public class MaxPQ<key extends Comparable<key>> implements PrimaryQueueBase<key>
     }
 
     private void checkCapacity() {
-        if (N == pq.length) {
-            resize(2 * N);
+        if (size == pq.length) {
+            resize(2 * size);
         }
     }
 
     private void resize(int size) {
-        key[] newArray = (key[]) new Comparable[size];
-        System.arraycopy(pq, 0, newArray, 0, N);
+        K[] newArray = (K[]) new Comparable[size];
+        System.arraycopy(pq, 0, newArray, 0, this.size);
         pq = newArray;
     }
 
