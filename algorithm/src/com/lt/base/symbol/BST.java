@@ -4,9 +4,11 @@ import com.lt.base.stack.Stack;
 import com.lt.base.stack.StackByArray;
 import edu.princeton.cs.algs4.StdOut;
 
+import java.util.NoSuchElementException;
+
 /**
  * @author liangtao
- * @description 二叉查找树,统一使用
+ * @description 二叉查找树, 统一使用
  * @date 2021年02月20 17:10
  **/
 public class BST<K extends Comparable<K>, V> implements OrderedST<K, V> {
@@ -69,18 +71,25 @@ public class BST<K extends Comparable<K>, V> implements OrderedST<K, V> {
 
     @Override
     public K min() {
-        if (isEmpty()) return null;
-        Node cur = head;
-        while (cur.left != null) cur = cur.left;
-        return cur.key;
+        if (isEmpty()) throw new NoSuchElementException();
+        return min(head).key;
+    }
+
+    private Node min(Node cur) {
+        if (cur.left == null) return cur;
+        else return min(cur.left);
     }
 
     @Override
     public K max() {
-        if (isEmpty()) return null;
-        Node cur = head;
-        while (cur.right != null) cur = cur.right;
-        return cur.key;
+        if (isEmpty()) throw new NoSuchElementException();
+        return max(head).key;
+    }
+
+    private Node max(Node cur) {
+        if (cur.right == null) return cur;
+        else return max(cur.right);
+
     }
 
     /**
@@ -88,15 +97,24 @@ public class BST<K extends Comparable<K>, V> implements OrderedST<K, V> {
      */
     @Override
     public K floor(K key) {
-        Node cur = head;
-        int cmp = 1;
-        while (cur != null && cmp > 0) {
-            cmp = cur.key.compareTo(key);
-            if (cmp > 0) cur = cur.left;
-        }
+        if (key == null) throw new IllegalArgumentException("floor（）的参数为null");
+        if (isEmpty()) throw new NoSuchElementException("使用了空符号表调用floor（）");
+        Node result = floor(head, key);
+        if (result == null) throw new NoSuchElementException("floor（）的参数太小");
+        else return result.key;
+    }
 
-        if (cur == null || cmp > 0) return null;
-        else return cur.key;
+    private Node floor(Node cur, K key) {
+        if (cur == null) return null;
+        int cmp = cur.key.compareTo(key);
+        if (cmp == 0) return cur;
+        else if (cmp > 0) return floor(cur.left, key);
+            //小于0还要在比较右侧是否也小于
+        else {
+            Node rResult = floor(cur.right, key);
+            if (rResult != null) return rResult;
+            else return cur;
+        }
     }
 
     /**
@@ -104,14 +122,24 @@ public class BST<K extends Comparable<K>, V> implements OrderedST<K, V> {
      **/
     @Override
     public K ceiling(K key) {
-        Node cur = head;
-        int cmp = -1;
-        while (cur != null && cmp < 0) {
-            cmp = cur.key.compareTo(key);
-            if (cmp < 0) cur = cur.right;
+        if (key == null) throw new IllegalArgumentException("ceiling（）的参数为null");
+        if (isEmpty()) throw new NoSuchElementException("使用了空符号表调用 ceiling（）");
+        Node result = ceiling(head, key);
+        if (result == null) throw new NoSuchElementException("ceiling() 的参数太大");
+        else return result.key;
+    }
+
+    private Node ceiling(Node cur, K key) {
+        if (cur == null) return null;
+        int cmp = cur.key.compareTo(key);
+        if (cmp == 0) return cur;
+        else if (cmp < 0) return ceiling(cur.right, key);
+            //大于0， 看看左节点是否也大于0
+        else {
+            Node lResult = ceiling(cur.left, key);
+            if (lResult != null) return lResult;
+            else return cur;
         }
-        if (cur == null || cmp < 0) return null;
-        else return cur.key;
     }
 
     /**
@@ -119,43 +147,116 @@ public class BST<K extends Comparable<K>, V> implements OrderedST<K, V> {
      */
     @Override
     public int rank(K key) {
-        Node cur = head;
-        int cmp = 1;
-        while (cur != null && cmp >= 0) {
-            cmp = cur.key.compareTo(key);
-            if (cmp >= 0) cur = cur.left;
+        if (key == null) throw new IllegalArgumentException("rank（）的参数为null");
+        return rank(head, key);
+    }
+
+
+    private int rank(Node cur, K key) {
+        if (cur == null) return 0;
+        int cmp = cur.key.compareTo(key);
+        if (cmp > 0) return rank(cur.left, key);
+        else if (cmp < 0) return 1 + size(cur.left) + rank(cur.right,key);
+        else return size(cur.left);
+    }
+
+    /**
+     * 获取排名为k的键(从0开始)
+     */
+    @Override
+    public K select(int k) {
+        if (k > size() || k < 0) throw new IllegalArgumentException("排名参数过大或者过小");
+        return select(head, k).key;
+    }
+
+    private Node select(Node cur, int k) {
+        if (cur == null) return null;
+        int leftSize = size(cur.left);
+        if (k > leftSize) return select(cur.right, k - leftSize - 1);
+        if (k < leftSize) return select(cur.left, k);
+        else return cur;
+    }
+
+
+    @Override
+    public V delete(K key) {
+        if (key == null) throw new IllegalArgumentException("用空键调用delete（）");
+        V result = get(key);
+        head = delete(head, key);
+        return result;
+    }
+
+    private Node delete(Node cur, K key) {
+        if (cur == null) return null;
+        int cmp = cur.key.compareTo(key);
+        if (cmp > 0) delete(cur.left, key);
+        else if (cmp < 0) delete(cur.right, key);
+        else {
+            if (cur.left == null) return cur.right;
+            if (cur.right == null) return cur.left;
+            //寻找后继节点
+            Node t = cur;
+            cur = min(cur.right);
+            cur.right = delMin(cur.right);
+            cur.left = t.left;
         }
-        if (cur == null || cmp >= 0) return 0;
-        else return cur.size;
+        cur.size = size(cur.left) + size(cur.right) + 1;
+        return cur;
+    }
+
+
+    @Override
+    public V delMax() {
+        if (isEmpty()) throw new NoSuchElementException();
+        V result = max(head).value;
+        head = delMax(head);
+        return result;
+    }
+
+    private Node delMax(Node cur) {
+        if (cur.right == null) return cur.left;
+        cur.right = delMax(cur.right);
+        cur.size = size(cur.left) + size(cur.right) + 1;
+        return cur;
     }
 
     @Override
-    public K select(int k) {
-        return null;
+    public V delMin() {
+        if (isEmpty()) throw new NoSuchElementException();
+        V result = min(head).value;
+        head = delMin(head);
+        return result;
     }
+
+    private Node delMin(Node cur) {
+        if (cur.left == null) return cur.right;
+        cur.left = delMin(cur.left);
+        cur.size = size(cur.left) + size(cur.right) + 1;
+        return cur;
+    }
+
 
     @Override
     public Iterable<K> keys(K lo, K hi) {
         throw new UnsupportedOperationException();
     }
-    private void preorder(Stack<K> stack,Node node){
-        if (node==null) return;
-        preorder(stack,node.left);
-        stack.push(node.key);
-        preorder(stack,node.right);
-    }
-
 
     @Override
     public Iterable<K> keys() {
         Stack<K> kStack = new StackByArray<>();
-        preorder(kStack,head);
+        preorder(kStack, head);
         return kStack;
     }
 
+    private void preorder(Stack<K> stack, Node node) {
+        if (node == null) return;
+        preorder(stack, node.left);
+        stack.push(node.key);
+        preorder(stack, node.right);
+    }
 
     public boolean check() {
-        if (!isBST())            StdOut.println("Not in symmetric order");
+        if (!isBST()) StdOut.println("Not in symmetric order");
         if (!isSizeConsistent()) StdOut.println("Subtree counts not consistent");
         if (!isRankConsistent()) StdOut.println("Ranks not consistent");
         return isBST() && isSizeConsistent() && isRankConsistent();
@@ -178,7 +279,10 @@ public class BST<K extends Comparable<K>, V> implements OrderedST<K, V> {
     }
 
     // are the size fields correct?
-    private boolean isSizeConsistent() { return isSizeConsistent(head); }
+    private boolean isSizeConsistent() {
+        return isSizeConsistent(head);
+    }
+
     private boolean isSizeConsistent(Node x) {
         if (x == null) return true;
         if (x.size != size(x.left) + size(x.right) + 1) return false;

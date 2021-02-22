@@ -28,7 +28,7 @@ public class BaseTest {
 //        stBehaviorTest("leipzig100K.txt", new BinarySearchST<>());
 //        stBehaviorTest("tale.txt", new BST<>());
 //        stPerformanceTest(1, "tale.txt", new BST<>());
-        orderStPerformanceTest(1, "tale.txt", new BST<>());
+        orderStPerformanceTest(1, "tinyTale.txt", new BST<>());
     }
 
     /**
@@ -164,12 +164,15 @@ public class BaseTest {
         StdOut.println("ceiling->"+st.ceiling("c"));
         StdOut.println("ceiling->"+trueBst.ceiling("c"));
 
-        StdOut.println("select->"+st.select(12));
-        StdOut.println("select->"+trueBst.select(12));
-
+        StdOut.println("select->"+trueBst.select(5));
+        StdOut.println("select->"+st.select(5));
         st.delMax();
-        ((BST)st).check();
         trueBst.deleteMax();
+        st.delMin();
+        trueBst.deleteMin();
+        st.delete("!");
+        trueBst.delete("!");
+        ((BST)st).check();
 
 
     }
