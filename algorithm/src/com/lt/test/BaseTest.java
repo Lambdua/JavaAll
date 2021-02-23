@@ -28,7 +28,7 @@ public class BaseTest {
 //        stBehaviorTest("leipzig100K.txt", new BinarySearchST<>());
 //        stBehaviorTest("tale.txt", new BST<>());
 //        stPerformanceTest(1, "tale.txt", new BST<>());
-        orderStPerformanceTest(1, "tinyTale.txt", new BST<>());
+        orderStPerformanceTest(1, "tale.txt", new BST<>());
     }
 
     /**
@@ -174,7 +174,14 @@ public class BaseTest {
         trueBst.delete("!");
         ((BST)st).check();
 
+        for (String key : st.keys()) {
+            System.out.print(key+"->" + st.get(key)+" ");
+        }
 
+        System.out.println("");
+        for (String key : trueBst.keys()) {
+            System.out.print(key +"->" + trueBst.get(key)+" ");
+        }
     }
 
 

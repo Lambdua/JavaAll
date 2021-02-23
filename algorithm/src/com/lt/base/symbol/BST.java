@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
 
 /**
  * @author liangtao
- * @description 二叉查找树, 统一使用
+ * @description 二叉查找树, 为了便于理解, 统一使用递归调用内部方法实现。后续的符号表不再使用递归调用进行实现
  * @date 2021年02月20 17:10
  **/
 public class BST<K extends Comparable<K>, V> implements OrderedST<K, V> {
@@ -156,7 +156,7 @@ public class BST<K extends Comparable<K>, V> implements OrderedST<K, V> {
         if (cur == null) return 0;
         int cmp = cur.key.compareTo(key);
         if (cmp > 0) return rank(cur.left, key);
-        else if (cmp < 0) return 1 + size(cur.left) + rank(cur.right,key);
+        else if (cmp < 0) return 1 + size(cur.left) + rank(cur.right, key);
         else return size(cur.left);
     }
 
@@ -256,21 +256,19 @@ public class BST<K extends Comparable<K>, V> implements OrderedST<K, V> {
     }
 
     public boolean check() {
-        if (!isBST()) StdOut.println("Not in symmetric order");
-        if (!isSizeConsistent()) StdOut.println("Subtree counts not consistent");
-        if (!isRankConsistent()) StdOut.println("Ranks not consistent");
+        if (!isBST()) StdOut.println("不对称");
+        if (!isSizeConsistent()) StdOut.println("子树计数不一致");
+        if (!isRankConsistent()) StdOut.println("Ranks 不一致");
         return isBST() && isSizeConsistent() && isRankConsistent();
     }
 
-    // does this binary tree satisfy symmetric order?
-    // Note: this test also ensures that data structure is a binary tree since order is strict
+    // 注意：由于顺序严格，此测试还确保数据结构是二叉树
     private boolean isBST() {
         return isBST(head, null, null);
     }
 
-    // is the tree rooted at x a BST with all keys strictly between min and max
-    // (if min or max is null, treat as empty constraint)
-    // Credit: Bob Dondero's elegant solution
+    // 是植根于x BST且所有键都严格在min和max之间的树
+    // （如果min或max为null，则视为空约束）
     private boolean isBST(Node x, K min, K max) {
         if (x == null) return true;
         if (min != null && x.key.compareTo(min) <= 0) return false;
@@ -278,7 +276,6 @@ public class BST<K extends Comparable<K>, V> implements OrderedST<K, V> {
         return isBST(x.left, min, x.key) && isBST(x.right, x.key, max);
     }
 
-    // are the size fields correct?
     private boolean isSizeConsistent() {
         return isSizeConsistent(head);
     }
@@ -289,7 +286,6 @@ public class BST<K extends Comparable<K>, V> implements OrderedST<K, V> {
         return isSizeConsistent(x.left) && isSizeConsistent(x.right);
     }
 
-    // check that ranks are consistent
     private boolean isRankConsistent() {
         for (int i = 0; i < size(); i++)
             if (i != rank(select(i))) return false;
