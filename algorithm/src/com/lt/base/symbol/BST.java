@@ -8,7 +8,8 @@ import java.util.NoSuchElementException;
 
 /**
  * @author liangtao
- * @description 二叉查找树, 为了便于理解, 统一使用递归调用内部方法实现。后续的符号表不再使用递归调用进行实现
+ * @description 二叉查找树, 为了便于理解, 统一使用递归调用内部方法实现。后续的符号表不再使用递归调用进行实现.
+ * 一般来说，递归的实现更容易验证其正确性，而非递归的实现效率更高。
  * @date 2021年02月20 17:10
  **/
 public class BST<K extends Comparable<K>, V> implements OrderedST<K, V> {
@@ -238,6 +239,7 @@ public class BST<K extends Comparable<K>, V> implements OrderedST<K, V> {
 
     @Override
     public Iterable<K> keys(K lo, K hi) {
+        //todo 没有实现
         throw new UnsupportedOperationException();
     }
 
@@ -248,6 +250,11 @@ public class BST<K extends Comparable<K>, V> implements OrderedST<K, V> {
         return kStack;
     }
 
+    /**
+     * 前序遍历
+     * @author liangtao
+     * @date 2021/2/23
+     **/
     private void preorder(Stack<K> stack, Node node) {
         if (node == null) return;
         preorder(stack, node.left);
