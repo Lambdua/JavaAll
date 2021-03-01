@@ -1,5 +1,10 @@
 package com.lt.base.symbol;
 
+import com.lt.base.stack.Stack;
+import com.lt.base.stack.StackByArray;
+
+import java.util.NoSuchElementException;
+
 /**
  * @author liangtao
  * @description 红黑查找树
@@ -74,38 +79,126 @@ public class RedBlackBST<K extends Comparable<K>, V> implements OrderedST<K, V> 
 
     @Override
     public K min() {
-        return null;
+        if (isEmpty()) throw new NoSuchElementException("用空符号表调用min（）");
+        Node cur = head;
+        while (cur.left != null) cur = cur.left;
+        return cur.key;
     }
 
     @Override
     public K max() {
-        return null;
+        if (isEmpty()) throw new NoSuchElementException("用空符号表调用max（）");
+        Node cur = head;
+        while (cur.right != null) cur = cur.right;
+        return cur.key;
     }
 
+    /**
+     * 获取小于等于K的最大键
+     */
     @Override
     public K floor(K key) {
-        return null;
+        if (key == null) throw new IllegalArgumentException("floor（）的参数为null");
+        if (isEmpty()) throw new NoSuchElementException("用空符号表调用floor（）");
+        Node cur = head;
+        while (cur != null) {
+            int cmp = cur.key.compareTo(key);
+            if (cmp > 0) cur = cur.left;
+            else if (cmp == 0) return key;
+            else {
+                if (cur.right != null && cur.right.key.compareTo(key) <= 0) cur = cur.right;
+                else return cur.key;
+            }
+        }
+        throw new NoSuchElementException("floor（）的参数太小");
     }
 
+    /**
+     * 获取大于等于Key的最小键
+     **/
     @Override
     public K ceiling(K key) {
-        return null;
+        if (key == null) throw new IllegalArgumentException("ceiling（）的参数为null");
+        if (isEmpty()) throw new NoSuchElementException("用空符号表调用ceiling（）");
+        Node cur = head;
+        while (cur != null) {
+            int cmp = cur.key.compareTo(key);
+            if (cmp < 0) cur = cur.right;
+            else if (cmp == 0) return key;
+            else {
+                if (cur.left != null && cur.left.key.compareTo(key) >= 0) cur = cur.left;
+                else return cur.key;
+            }
+        }
+        throw new NoSuchElementException("ceiling（）的参数太小");
     }
 
+    /**
+     * 小于key的键的数量
+     */
     @Override
     public int rank(K key) {
-        return 0;
+        if (key == null) throw new IllegalArgumentException("rank（）的参数为null");
+        if (isEmpty()) throw new NoSuchElementException("用空符号表调用rank（）");
+        Node cur = head;
+        int total = 0;
+        while (cur != null) {
+            int cmp = cur.key.compareTo(key);
+            if (cmp > 0) cur = cur.left;
+            else if (cmp == 0) return size(cur.left);
+            else {
+                total += size(cur.left) + 1;
+                if (cur.right != null && cur.right.key.compareTo(key) < 0) {
+                    cur = cur.right;
+                } else {
+                    break;
+                }
+            }
+        }
+        return total;
     }
 
+    /**
+     * 获取排名位k的键
+     */
     @Override
     public K select(int k) {
-        return null;
+        if (k < 0 || k >= size()) {
+            throw new IllegalArgumentException("select（）的参数无效：" + k);
+        }
+        Node cur = head;
+        while (cur != null) {
+            int leftSize = size(cur.left);
+            if (leftSize > k) cur = cur.left;
+            else if (leftSize < k) {
+                k -= leftSize + 1;
+                cur = cur.right;
+            } else return cur.key;
+        }
+        throw new RuntimeException("未知异常");
     }
 
     @Override
     public Iterable<K> keys(K lo, K hi) {
-        return null;
+        Stack<K> stack = new StackByArray<>();
+        preorder(stack, head, lo, hi);
+        return stack;
     }
+
+    /**
+     * 前序遍历
+     *
+     * @author liangtao
+     * @date 2021/2/23
+     **/
+    private void preorder(Stack<K> stack, Node node, K lo, K hi) {
+        if (node == null) return;
+        if (node.key.compareTo(lo) < 0 || node.key.compareTo(hi) > 0) return;
+        preorder(stack, node.left, lo, hi);
+        stack.push(node.key);
+        preorder(stack, node.right, lo, hi);
+    }
+
 
     @Override
     public void put(K key, V value) {
