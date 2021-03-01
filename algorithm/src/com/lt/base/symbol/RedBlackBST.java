@@ -237,6 +237,14 @@ public class RedBlackBST<K extends Comparable<K>, V> implements OrderedST<K, V> 
 
     @Override
     public V get(K key) {
+        if (key == null) throw new IllegalArgumentException("get（）的参数为null");
+        Node cur = head;
+        while (cur != null) {
+            int cmp = cur.key.compareTo(key);
+            if (cmp > 0) cur = cur.left;
+            else if (cmp < 0) cur = cur.right;
+            else return cur.value;
+        }
         return null;
     }
 
