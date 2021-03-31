@@ -18,6 +18,7 @@ public class Demo {
         try {
             editor.openFile("test.txt");
             editor.saveFile();
+            System.out.println("33");
         } catch (Exception e) {
             e.printStackTrace();
         }
