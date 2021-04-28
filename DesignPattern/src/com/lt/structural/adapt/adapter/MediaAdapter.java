@@ -3,7 +3,7 @@ package com.lt.structural.adapt.adapter;
 import com.lt.structural.adapt.adaptee.AdviseMediaPlayer;
 import com.lt.structural.adapt.adaptee.DlcPlayer;
 import com.lt.structural.adapt.adaptee.Mp4Player;
-import com.lt.structural.adapt.target.MediaPlayer;
+import com.lt.structural.adapt.adapter_target.MediaPlayer;
 
 /**
  * @author liangtao

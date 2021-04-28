@@ -1,7 +1,7 @@
 package com.lt.structural.adapt.client;
 
 
-import com.lt.structural.adapt.target.AudioPlayer;
+import com.lt.structural.adapt.adapter_target.AudioPlayer;
 
 /**
  * @author liangtao
