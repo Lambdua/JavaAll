@@ -86,6 +86,7 @@ public class ArticleService {
         Article curArticle = JSONUtil.toBean(articleJson, Article.class);
         curArticle.setVotes(curArticle.getVotes() + 1);
         command.set(ARTICLE_INFO+articleId, JSONUtil.toJsonStr(curArticle));
+
     }
 
     public void addArticle(Article article) {
@@ -121,6 +122,7 @@ public class ArticleService {
                 .map(item -> command.hget(ARTICLE_INFO, item))
                 .map(artJson -> JSONUtil.toBean(artJson, Article.class))
                 .collect(Collectors.toList());
+
     }
 
 }
