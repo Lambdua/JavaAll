@@ -13,9 +13,12 @@ import java.time.temporal.ChronoUnit;
  * @date 2021年05月06 15:58
  **/
 public class RedisClientFactory {
-    private static final String HOST = "121.199.44.208";
-    private static final int PORT = 6371;
-    private static final String PWD = "redis123";
+//    private static final String HOST = "121.199.44.208";
+//private static final int PORT = 6379;
+//    private static final String PWD = "redis123";
+    private static final String HOST = "202.119.11.121";
+    private static final int PORT = 6388;
+    private static final String PWD = "Agile@123456";
 
     private static RedisClient REDIS_CLIENT;
 
@@ -24,7 +27,7 @@ public class RedisClientFactory {
         RedisURI redisUri = RedisURI.builder()
                 .withHost(HOST)
                 .withPort(PORT)
-                .withPassword(PWD)
+//                .withPassword(PWD)
                 .withTimeout(Duration.of(10, ChronoUnit.SECONDS))
                 .build();
         // <2> 创建客户端
