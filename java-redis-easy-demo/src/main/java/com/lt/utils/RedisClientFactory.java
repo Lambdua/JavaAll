@@ -1,11 +1,7 @@
 package com.lt.utils;
 
 import io.lettuce.core.RedisClient;
-import io.lettuce.core.RedisURI;
 import io.lettuce.core.api.sync.RedisCommands;
-
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 
 /**
  * @author liangtao
@@ -23,15 +19,15 @@ public class RedisClientFactory {
     private static RedisClient REDIS_CLIENT;
 
     static {
-        // <1> 创建单机连接的连接信息
-        RedisURI redisUri = RedisURI.builder()
-                .withHost(HOST)
-                .withPort(PORT)
-//                .withPassword(PWD)
-                .withTimeout(Duration.of(10, ChronoUnit.SECONDS))
-                .build();
-        // <2> 创建客户端
-        REDIS_CLIENT = RedisClient.create(redisUri);
+//        // <1> 创建单机连接的连接信息
+//        RedisURI redisUri = RedisURI.builder()
+//                .withHost(HOST)
+//                .withPort(PORT)
+////                .withPassword(PWD)
+//                .withTimeout(Duration.of(10, ChronoUnit.SECONDS))
+//                .build();
+//        // <2> 创建客户端
+//        REDIS_CLIENT = RedisClient.create(redisUri);
     }
 
     public static RedisClient buildClient() {
