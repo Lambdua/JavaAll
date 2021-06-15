@@ -9,12 +9,12 @@ import io.lettuce.core.api.sync.RedisCommands;
  * @date 2021年05月06 15:58
  **/
 public class RedisClientFactory {
-//    private static final String HOST = "121.199.44.208";
-//private static final int PORT = 6379;
+    private static final String HOST = "121.199.44.208";
+private static final int PORT = 6378;
 //    private static final String PWD = "redis123";
-    private static final String HOST = "202.119.11.121";
-    private static final int PORT = 6388;
-    private static final String PWD = "Agile@123456";
+//    private static final String HOST = "202.119.11.121";
+//    private static final int PORT = 6388;
+//    private static final String PWD = "Agile@123456";
 
     private static RedisClient REDIS_CLIENT;
 
@@ -37,4 +37,5 @@ public class RedisClientFactory {
     public static RedisCommands<String, String> buildCommand() {
         return REDIS_CLIENT.connect().sync();
     }
+
 }

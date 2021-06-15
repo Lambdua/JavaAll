@@ -27,5 +27,13 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/aspose-cells-21.5-crack.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>com.aspose</groupId>
+            <artifactId>slides</artifactId>
+            <scope>system</scope>
+            <!--            <systemPath>${project.basedir}/lib/aspose-slides-21.5-jdk16.jar</systemPath>-->
+            <systemPath>${project.basedir}/lib/aspose-slides-21.5-crack.jar</systemPath>
+        </dependency>
+
     </dependencies>
 </project>
