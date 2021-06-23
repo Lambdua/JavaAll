@@ -14,6 +14,7 @@ public class SlidesTest {
         InputStream licenseStream = SlidesTest.class.getClassLoader().getResourceAsStream("license.xml");
         License license = new License();
         license.setLicense(licenseStream);
+        
         System.out.println(license.isLicensed());
     }
 }
