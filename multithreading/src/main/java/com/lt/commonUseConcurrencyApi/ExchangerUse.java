@@ -1,6 +1,7 @@
 package com.lt.commonUseConcurrencyApi;
 
-import com.lt.completableFuture.CompletableFutureConstant;
+
+import com.lt.future.CompletableFutureConstant;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Exchanger;

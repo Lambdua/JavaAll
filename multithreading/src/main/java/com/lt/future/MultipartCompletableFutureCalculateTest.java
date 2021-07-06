@@ -1,4 +1,4 @@
-package com.lt.completableFuture;
+package com.lt.future;
 
 import org.junit.Test;
 

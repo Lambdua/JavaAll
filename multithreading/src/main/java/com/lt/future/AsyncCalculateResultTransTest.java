@@ -1,11 +1,12 @@
-package com.lt.completableFuture;
+package com.lt.future;
 
 import org.junit.Test;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-import static com.lt.completableFuture.CompletableFutureConstant.POOL;
+import static com.lt.future.CompletableFutureConstant.POOL;
+
 
 /**
  * @author 梁先生

@@ -1,6 +1,7 @@
 package com.lt.safeCancleThread;
 
-import com.lt.completableFuture.CompletableFutureConstant;
+
+import com.lt.future.CompletableFutureConstant;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
