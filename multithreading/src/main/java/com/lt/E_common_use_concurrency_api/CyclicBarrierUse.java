@@ -1,4 +1,4 @@
-package com.lt.E_commonUseConcurrencyApi;
+package com.lt.E_common_use_concurrency_api;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
@@ -23,10 +23,8 @@ public class CyclicBarrierUse {
                 System.out.println("异常" + e.getMessage());
             }
         }).start();
-
         System.out.println("in main ");
         cyclicBarrier.await();
-
         System.out.println("main finish");
     }
 

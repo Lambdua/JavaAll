@@ -1,4 +1,4 @@
-package com.lt.A_threadSimplyUse;
+package com.lt.F_thread_communication;
 
 import cn.hutool.core.util.RandomUtil;
 
@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 /**
  * @author 梁先生
+ * 管道通信
  * @Date 2020/10/6
  **/
 public class PipedStreamDemo {

@@ -1,4 +1,6 @@
-package com.lt.B_threadPool;
+package com.lt.B_thread_pool;
+
+import org.junit.Test;
 
 import java.util.concurrent.*;
 
@@ -16,12 +18,6 @@ import java.util.concurrent.*;
  * https://blog.csdn.net/CrazyMo_/article/details/80631348
  **/
 public class ThreadPoolBlockingQueueIntroduction {
-
-    public static void main(String[] args) {
-        ThreadPoolBlockingQueueIntroduction entity = new ThreadPoolBlockingQueueIntroduction();
-        entity.synchronousQueueUse();
-    }
-
 
     private ThreadPoolExecutor buildByArgs(int corePoolSize, int maximumPoolSize, BlockingQueue<Runnable> workQueue) {
         return new ThreadPoolExecutor(corePoolSize, maximumPoolSize,
@@ -43,9 +39,10 @@ public class ThreadPoolBlockingQueueIntroduction {
      * 比如：核心线程数为2，最大线程数为3；使用SynchronousQueue。
      * 当前有2个核心线程在运行，又来了个A任务，两个核心线程没有执行完当前任务，根据如果运行的线程等于或多于 corePoolSize，
      * 则 Executor 始终首选将请求加入队列，而不添加新的线程。所以A任务被添加到队列，此时的队列是SynchronousQueue，
-     * 当前不存在可用于立即运行任务的线程，因此会构造一个新的线程，此时又来了个B任务，两个核心线程还没有执行完。
-     * 新创建的线程正在执行A任务，所以B任务进入Queue后，最大线程数为3，发现没地方仍了。就只能执行异常策略(RejectedExecutionException)。
+     * 当前不存在可用于立即运行任务的线程，因此会构造一个新的线程执行A，此时又来了个B任务，两个核心线程还没有执行完。
+     * 新创建的线程正在执行A任务，所以B任务进入Queue后，最大线程数为3，发现没地方扔了。就只能执行异常策略(RejectedExecutionException)。
      */
+    @Test
     public void synchronousQueueUse() {
         ThreadPoolExecutor pool = buildByArgs(2, 3, new SynchronousQueue<>());
         for (int i = 0; i < 4; i++) {
@@ -79,6 +76,7 @@ public class ThreadPoolBlockingQueueIntroduction {
      * 此时又来了个B任务，两个核心线程没有执行完当前任务，A任务在队列中等待，队列已满。所以根据如果无法将请求加入队列，则创建新的线程，
      * B任务被新创建的线程所执行，此时又来个C任务，此时maximumPoolSize已满，队列已满，只能执行异常策略(RejectedExecutionException)。
      */
+    @Test
     public void linkBlockingQueueUse() {
         ThreadPoolExecutor pool = buildByArgs(2, 3, new LinkedBlockingQueue<>(1));
         for (int i = 0; i < 5; i++) {
@@ -101,6 +99,7 @@ public class ThreadPoolBlockingQueueIntroduction {
      * LinkedBlockingQueue 底层是链表结构，ArrayBlockingQueue  底层是数组结构。
      * 你来一个我接一个，直到我容不下你了。FIFO，先进先出。
      */
+    @Test
     public void arrayBlockingQueueUse() {
         ThreadPoolExecutor pool = buildByArgs(2, 3, new ArrayBlockingQueue<>(1));
         for (int i = 0; i < 5; i++) {

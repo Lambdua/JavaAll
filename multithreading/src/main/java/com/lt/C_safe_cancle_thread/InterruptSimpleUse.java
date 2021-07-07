@@ -1,4 +1,6 @@
-package com.lt.C_safeCancleThread;
+package com.lt.C_safe_cancle_thread;
+
+import org.junit.Test;
 
 /**
  * @author 梁先生
@@ -41,6 +43,7 @@ public class InterruptSimpleUse {
     /**
      * {@link Thread#isInterrupted()}  会返回当前线程的中断标志位
      */
+    @Test
     public void isInterruptedUse() {
         Thread thread = buildThread();
         thread.start();
@@ -54,7 +57,8 @@ public class InterruptSimpleUse {
      * 该方法是一个Thread类的静态方法，调用时会返回当前线程的中断状态码。
      * 内部调用：  return currentThread().isInterrupted(true); 这个内部方法参数为true则进行重置
      */
-    public void interruptedUse() {
+    @Test
+    public void interruptedUse() throws InterruptedException {
         Thread thread = new Thread(() -> {
             while (true) {
                 if (Thread.interrupted()) {

@@ -1,4 +1,4 @@
-package com.lt.C_safeCancleThread;
+package com.lt.C_safe_cancle_thread;
 
 
 import com.lt.Z_common.constants.CompletableFutureConstant;
