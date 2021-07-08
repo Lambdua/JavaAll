@@ -1,4 +1,4 @@
-package com.lt.C_safe_cancle_thread;
+package com.lt.C_线程安全关闭;
 
 
 import java.math.BigInteger;

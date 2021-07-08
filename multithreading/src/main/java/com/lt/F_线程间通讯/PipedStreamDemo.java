@@ -1,4 +1,4 @@
-package com.lt.F_thread_communication;
+package com.lt.F_线程间通讯;
 
 import cn.hutool.core.util.RandomUtil;
 

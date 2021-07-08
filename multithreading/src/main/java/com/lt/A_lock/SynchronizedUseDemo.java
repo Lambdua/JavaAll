@@ -1,4 +1,4 @@
-package com.lt;
+package com.lt.A_lock;
 
 import com.lt.Z_common.ThreadUtils;
 import org.junit.Test;

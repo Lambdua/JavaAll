@@ -1,4 +1,4 @@
-package com.lt.A_thread_simply_use;
+package com.lt.A_线程的几种实现方式;
 
 import java.util.concurrent.*;
 
