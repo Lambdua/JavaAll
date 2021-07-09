@@ -23,7 +23,7 @@ public class CompletableFutureConstant {
     //线程数等于cpu核心数
     public static final int AVALIABLE_PROCESSORS = Runtime.getRuntime().availableProcessors();
     public static final ThreadPoolExecutor POOL = new ThreadPoolExecutor(AVALIABLE_PROCESSORS,
-            AVALIABLE_PROCESSORS * 2, 1, TimeUnit.MINUTES, new LinkedBlockingQueue<>(5));
+            AVALIABLE_PROCESSORS * 2, 1, TimeUnit.MINUTES, new LinkedBlockingQueue<>(10));
 
     public  void templateMethod(CompletableFuture future) throws ExecutionException, InterruptedException {
         sleep(100);
