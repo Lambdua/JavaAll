@@ -1,4 +1,4 @@
-package com.lt.E_common_use_concurrency_api;
+package com.lt.E_juc包中常用并发工具类;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
@@ -12,7 +12,7 @@ import java.util.concurrent.CyclicBarrier;
  **/
 public class CyclicBarrierUse {
     //parties: 指让多少个线程或者任务等待至barrier状态
-    static CyclicBarrier cyclicBarrier = new CyclicBarrier(2, new After());
+    static CyclicBarrier cyclicBarrier = new CyclicBarrier(2,()->System.out.println("等待线程数以足够，启动当前任务"));
 
     public static void main(String[] args) throws BrokenBarrierException, InterruptedException {
         new Thread(() -> {
@@ -26,13 +26,6 @@ public class CyclicBarrierUse {
         System.out.println("in main ");
         cyclicBarrier.await();
         System.out.println("main finish");
-    }
 
-    static class After implements Runnable {
-
-        @Override
-        public void run() {
-            System.out.println("等待线程数以足够，启动当前任务");
-        }
     }
 }

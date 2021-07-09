@@ -1,4 +1,4 @@
-package com.lt.A_lock;
+package com.lt.A_各种锁实现.简单锁实现;
 
 import com.lt.Z_common.ThreadUtils;
 
